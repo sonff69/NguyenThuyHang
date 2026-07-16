@@ -6,11 +6,11 @@
     <title>Nguyễn Thuý Hằng - Digital Portfolio</title>
     <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Alpine.js (for smooth interactive components and modals) -->
+    <!-- Alpine.js (Hỗ trợ tương tác mượt mà và đóng mở modal) -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <!-- FontAwesome for beautiful icons -->
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Font: Be Vietnam Pro (modern, friendly, legible) -->
+    <!-- Google Font: Be Vietnam Pro -->
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
@@ -18,26 +18,40 @@
             font-family: 'Be Vietnam Pro', sans-serif;
             scroll-behavior: smooth;
             overflow-x: hidden;
-            background-color: #0b1311;
+            background-color: #050a09;
         }
 
-        /* Glassmorphism base styling */
+        /* 20% Brightness reduction on background video as requested */
+        .video-bg {
+            filter: brightness(0.8);
+        }
+
+        /* Set ALL texts strictly to full white and apply subtle 10% text-glow */
+        *, *:before, *:after {
+            color: #ffffff !important;
+        }
+
+        h1, h2, h3, h4, h5, h6, p, span, a, button, li, code, i, strong, em {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.22), 0 0 18px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Glassmorphism design system */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
         .glass-panel-dark {
-            background: rgba(13, 27, 24, 0.65);
+            background: rgba(10, 20, 18, 0.7);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -45,17 +59,17 @@
         }
 
         .glass-card:hover {
-            background: rgba(255, 255, 255, 0.09);
-            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.22);
             transform: translateY(-6px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 
-                        0 0 20px rgba(16, 185, 129, 0.15);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 
+                        0 0 20px rgba(255, 255, 255, 0.1);
         }
 
-        /* Summer-dream leaf floating animation */
+        /* Dreamy leaf floating simulation */
         @keyframes float {
             0% { transform: translateY(0px) rotate(0deg); opacity: 0.1; }
-            50% { transform: translateY(-30px) rotate(15deg); opacity: 0.3; }
+            50% { transform: translateY(-30px) rotate(15deg); opacity: 0.25; }
             100% { transform: translateY(0px) rotate(0deg); opacity: 0.1; }
         }
 
@@ -63,51 +77,37 @@
             animation: float 8s ease-in-out infinite;
         }
 
-        /* Water droplet ripple effect simulator */
+        /* Water droplet ripple simulator */
         .water-wave {
             position: absolute;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
             animation: rip 2.5s ease-out infinite;
             opacity: 0;
             pointer-events: none;
         }
 
         @keyframes rip {
-            0% { width: 0; height: 0; opacity: 0.5; transform: translate(-50%, -50%); }
+            0% { width: 0; height: 0; opacity: 0.4; transform: translate(-50%, -50%); }
             100% { width: 350px; height: 350px; opacity: 0; transform: translate(-50%, -50%); }
         }
 
-        /* Color accentuation custom classes */
-        .accent-coral {
-            color: #ff7e79;
-        }
-        .bg-accent-coral {
-            background-color: #ff7e79;
-        }
-        .accent-emerald {
-            color: #2ec4b6;
-        }
-        .bg-accent-emerald {
-            background-color: #2ec4b6;
-        }
-
-        /* Custom scrollbar matching dreamy theme */
+        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: rgba(11, 19, 17, 0.95);
+            background: rgba(5, 10, 9, 0.95);
         }
         ::-webkit-scrollbar-thumb {
-            background: rgba(46, 196, 182, 0.3);
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: rgba(46, 196, 182, 0.6);
+            background: rgba(255, 255, 255, 0.4);
         }
 
-        /* Dynamic avatar droplet shape */
+        /* Droplet dynamic shape for avatar */
         .droplet-avatar {
             border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
             animation: morph 9s ease-in-out infinite;
@@ -125,48 +125,48 @@
 <body x-data="{ activeTab: 'all', openModal: null, scrolled: false, mobileMenu: false }" 
       @scroll.window="scrolled = (window.pageYOffset > 50) ? true : false">
 
-    <!-- Raw Background Video Container (No filter to preserve natural summer sunset & watercolor reflection) -->
+    <!-- Raw Background Video (No filter inside video container, filter brightness applied directly to video tag) -->
     <div class="fixed top-0 left-0 w-full h-full -z-10 overflow-hidden pointer-events-none">
-        <video autoplay muted loop playsinline class="w-full h-full object-cover">
+        <video autoplay muted loop playsinline class="w-full h-full object-cover video-bg">
             <source src="back.mp4" type="video/mp4">
         </video>
     </div>
 
-    <!-- Soft ambient layer to guarantee optimal text readability without filters on the video -->
-    <div class="fixed inset-0 bg-gradient-to-b from-black via-transparent to-black opacity-30 -z-10 pointer-events-none"></div>
+    <!-- Soft ambient container -->
+    <div class="fixed inset-0 bg-gradient-to-b from-black via-transparent to-black opacity-40 -z-10 pointer-events-none"></div>
 
-    <!-- Floating dreamy leaf elements as design decoration -->
+    <!-- Floating dreamy leaf elements in the background -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-        <div class="floating-leaf absolute top-1/4 left-10 w-24 h-24 bg-cover opacity-15" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%232ec4b6%22><path d=%22M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L7,18C12,20 16,17 19,13C22,9 21,4 21,4C21,4 16,3 12,5C10.74,5.63 9.47,6.5 8.2,7.45C9.84,7.47 11.45,7.5 13,8C14,8.3 16,8 17,8Z%22/></svg>');"></div>
-        <div class="floating-leaf absolute bottom-1/4 right-12 w-16 h-16 bg-cover opacity-10" style="animation-delay: -3s; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23ff7e79%22><path d=%22M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L7,18C12,20 16,17 19,13C22,9 21,4 21,4C21,4 16,3 12,5C10.74,5.63 9.47,6.5 8.2,7.45C9.84,7.47 11.45,7.5 13,8C14,8.3 16,8 17,8Z%22/></svg>');"></div>
+        <div class="floating-leaf absolute top-1/4 left-10 w-24 h-24 bg-cover opacity-15" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23ffffff%22><path d=%22M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L7,18C12,20 16,17 19,13C22,9 21,4 21,4C21,4 16,3 12,5C10.74,5.63 9.47,6.5 8.2,7.45C9.84,7.47 11.45,7.5 13,8C14,8.3 16,8 17,8Z%22/></svg>');"></div>
+        <div class="floating-leaf absolute bottom-1/4 right-12 w-16 h-16 bg-cover opacity-10" style="animation-delay: -3s; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23ffffff%22><path d=%22M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L7,18C12,20 16,17 19,13C22,9 21,4 21,4C21,4 16,3 12,5C10.74,5.63 9.47,6.5 8.2,7.45C9.84,7.47 11.45,7.5 13,8C14,8.3 16,8 17,8Z%22/></svg>');"></div>
     </div>
 
     <!-- HEADER / NAVIGATION -->
     <header class="fixed top-0 left-0 w-full z-40 transition-all duration-300"
             :class="scrolled ? 'glass-panel-dark py-3 shadow-lg' : 'py-5 bg-transparent'">
         <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-            <!-- Brand Logo with dreamy watermelon pink dot -->
+            <!-- Brand Logo -->
             <a href="#" class="text-xl font-bold tracking-wider flex items-center gap-2">
-                <span class="text-white">NGUYỄN THUÝ HẰNG</span>
-                <span class="w-2 h-2 rounded-full bg-accent-coral animate-ping"></span>
+                <span>NGUYỄN THUÝ HẰNG</span>
+                <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
             </a>
 
             <!-- Desktop Nav Items -->
             <nav class="hidden md:flex items-center space-x-8">
-                <a href="#about" class="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200">Hành Trình</a>
-                <a href="#assignments" class="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200">Sáng Tạo & Nghiên Cứu</a>
-                <a href="#reflection" class="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200">Góc Suy Ngẫm</a>
-                <!-- Special requested button inside Header -->
+                <a href="#about" class="text-sm font-medium hover:opacity-80 transition-opacity duration-200">Hành Trình</a>
+                <a href="#assignments" class="text-sm font-medium hover:opacity-80 transition-opacity duration-200">Sáng Tạo & Nghiên Cứu</a>
+                <a href="#reflection" class="text-sm font-medium hover:opacity-80 transition-opacity duration-200">Góc Suy Ngẫm</a>
+                <!-- Special requested button inside Header (styled glassmorphic with white text) -->
                 <a href="https://drive.google.com/drive/folders/1hS7iVECTdbsncSj9MIBWLAhmTn9MZoDL?usp=drive_link" 
                    target="_blank" 
-                   class="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-full glass-panel text-white hover:bg-white hover:text-black transition-all duration-300">
-                    <i class="fab fa-google-drive accent-emerald text-sm"></i>
+                   class="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-full glass-panel hover:bg-white hover:bg-opacity-10 transition-all duration-300">
+                    <i class="fab fa-google-drive text-sm"></i>
                     <span>Xem bài tập trên GG drive</span>
                 </a>
             </nav>
 
             <!-- Mobile Hamburger Button -->
-            <button class="md:hidden text-white hover:text-accent-emerald focus:outline-none" @click="mobileMenu = !mobileMenu">
+            <button class="md:hidden hover:opacity-80 focus:outline-none" @click="mobileMenu = !mobileMenu">
                 <i class="fas fa-bars text-xl" x-show="!mobileMenu"></i>
                 <i class="fas fa-times text-xl" x-show="mobileMenu"></i>
             </button>
@@ -175,12 +175,12 @@
         <!-- Mobile Menu Panel -->
         <div class="md:hidden glass-panel-dark absolute top-full left-0 w-full py-6 px-8 flex flex-col gap-4 shadow-2xl transition-all duration-300"
              x-show="mobileMenu" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
-            <a href="#about" @click="mobileMenu = false" class="text-lg text-gray-300 hover:text-white">Hành Trình</a>
-            <a href="#assignments" @click="mobileMenu = false" class="text-lg text-gray-300 hover:text-white">Sáng Tạo & Nghiên Cứu</a>
-            <a href="#reflection" @click="mobileMenu = false" class="text-lg text-gray-300 hover:text-white">Góc Suy Ngẫm</a>
+            <a href="#about" @click="mobileMenu = false" class="text-lg hover:opacity-80">Hành Trình</a>
+            <a href="#assignments" @click="mobileMenu = false" class="text-lg hover:opacity-80">Sáng Tạo & Nghiên Cứu</a>
+            <a href="#reflection" @click="mobileMenu = false" class="text-lg hover:opacity-80">Góc Suy Ngẫm</a>
             <a href="https://drive.google.com/drive/folders/1hS7iVECTdbsncSj9MIBWLAhmTn9MZoDL?usp=drive_link" 
                target="_blank" 
-               class="inline-flex items-center justify-center gap-2 text-sm font-semibold px-5 py-3 rounded-full bg-accent-emerald text-black hover:opacity-90 transition-opacity duration-200">
+               class="inline-flex items-center justify-center gap-2 text-sm font-semibold px-5 py-3 rounded-full glass-panel hover:bg-white hover:bg-opacity-10 transition-all duration-200">
                 <i class="fab fa-google-drive"></i>
                 <span>Xem bài tập trên GG drive</span>
             </a>
@@ -191,35 +191,35 @@
     <section class="min-h-screen flex items-center justify-center pt-24 px-6 relative overflow-hidden" id="hero">
         <div class="max-w-4xl text-center z-10">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel mb-6 animate-pulse">
-                <span class="w-2 h-2 rounded-full bg-accent-emerald"></span>
-                <span class="text-xs text-gray-300 tracking-wider uppercase">Nhập môn công nghệ số & Ứng dụng AI</span>
+                <span class="w-2 h-2 rounded-full bg-white"></span>
+                <span class="text-xs tracking-wider uppercase">Nhập môn công nghệ số & Ứng dụng AI</span>
             </div>
             
-            <h1 class="text-4xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-tight">
-                Gieo Mầm <span class="accent-emerald">Công Nghệ</span>,<br>
-                Chạm Ngõ <span class="accent-coral">Ngôn Ngữ</span> Tương Lai
+            <h1 class="text-4xl md:text-7xl font-bold tracking-tight mb-6 leading-tight">
+                Gieo Mầm Công Nghệ,<br>
+                Chạm Ngõ Ngôn Ngữ Tương Lai
             </h1>
             
-            <p class="text-lg md:text-xl text-gray-200 font-light max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p class="text-lg md:text-xl font-light max-w-2xl mx-auto mb-10 leading-relaxed opacity-90">
                 Nơi những ký tự chữ Hán bay bổng kết hợp cùng sức mạnh đột phá của Trí tuệ nhân tạo. 
-                Chào mừng bạn ghé thăm không gian lưu trữ bài học của Nguyễn Thuý Hằng.
+                Chào mừng bạn ghé thăm không gian lưu trữ học tập của Nguyễn Thuý Hằng.
             </p>
 
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                <a href="#assignments" class="px-8 py-3.5 rounded-full bg-white text-black font-semibold hover:bg-opacity-90 shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">
+                <a href="#assignments" class="px-8 py-3.5 rounded-full glass-panel hover:bg-white hover:bg-opacity-10 font-semibold shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">
                     Khám Phá Bài Tập <i class="fas fa-arrow-right ml-2 text-sm"></i>
                 </a>
-                <a href="#about" class="px-8 py-3.5 rounded-full glass-panel text-white font-medium hover:bg-white hover:bg-opacity-5 transition-all duration-200">
+                <a href="#about" class="px-8 py-3.5 rounded-full glass-panel hover:bg-white hover:bg-opacity-10 font-medium transition-all duration-200">
                     Về Bản Thân
                 </a>
             </div>
         </div>
 
-        <!-- Water Drop simulation element mimicking back.mp4 ripple -->
-        <div class="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex flex-col items-center pointer-events-none opacity-60">
-            <span class="text-xs text-gray-400 tracking-widest uppercase mb-2">Cuộn để cảm nhận dòng chảy</span>
-            <div class="w-6 h-10 rounded-full border-2 border-gray-400 flex justify-center pt-2">
-                <div class="w-1.5 h-3 bg-gray-400 rounded-full animate-bounce"></div>
+        <!-- Water Drop simulation element -->
+        <div class="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex flex-col items-center pointer-events-none opacity-50">
+            <span class="text-xs tracking-widest uppercase mb-2">Cuộn để cảm nhận dòng chảy</span>
+            <div class="w-6 h-10 rounded-full border-2 border-white flex justify-center pt-2">
+                <div class="w-1.5 h-3 bg-white rounded-full animate-bounce"></div>
             </div>
         </div>
     </section>
@@ -233,7 +233,7 @@
                 <div class="lg:col-span-5 flex justify-center">
                     <div class="relative w-72 h-72 md:w-96 md:h-96">
                         <!-- Morphing watery border background -->
-                        <div class="absolute inset-0 droplet-avatar opacity-30 bg-accent-emerald filter blur-md"></div>
+                        <div class="absolute inset-0 droplet-avatar opacity-20 bg-white filter blur-md"></div>
                         <!-- Morphing avatar image container -->
                         <div class="absolute inset-2 droplet-avatar overflow-hidden border border-white border-opacity-25 shadow-2xl">
                             <img src="Hình 1.jpg" alt="Nguyễn Thuý Hằng" class="w-full h-full object-cover">
@@ -241,21 +241,21 @@
                     </div>
                 </div>
 
-                <!-- Right: Professional & charming identity description -->
+                <!-- Right: Professional identity description -->
                 <div class="lg:col-span-7">
                     <div class="glass-panel p-8 md:p-10 rounded-3xl relative overflow-hidden shadow-2xl">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-accent-emerald opacity-5 rounded-full filter blur-3xl pointer-events-none"></div>
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-5 rounded-full filter blur-3xl pointer-events-none"></div>
                         
-                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Chào bạn, mình là Hằng 🍃</h2>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6">Chào bạn, mình là Hằng 🍃</h2>
                         
-                        <div class="space-y-4 text-gray-200 font-light leading-relaxed">
+                        <div class="space-y-4 font-light leading-relaxed opacity-95">
                             <p>
-                                Hiện đang là sinh viên chuyên ngành <strong class="text-white font-medium">Ngôn ngữ và Văn hoá Trung Quốc</strong> 
-                                tại ngôi trường giàu truyền thống <strong class="text-white font-medium">Đại học Ngoại ngữ - ĐHQGHN (ULIS)</strong>. 
-                                Mã số sinh viên của mình là <strong class="text-white font-medium">25041631</strong>.
+                                Hiện đang là sinh viên chuyên ngành <strong class="font-medium">Ngôn ngữ và Văn hoá Trung Quốc</strong> 
+                                tại trường <strong class="font-medium">Đại học Ngoại ngữ - ĐHQGHN (ULIS)</strong>. 
+                                Mã số sinh viên của mình là <strong class="font-medium">25041631</strong>.
                             </p>
                             <p>
-                                Trải qua học phần <em class="accent-emerald not-italic font-medium">"Nhập môn công nghệ số và ứng dụng trí tuệ nhân tạo"</em>, 
+                                Trải qua học phần <em class="not-italic font-medium">"Nhập môn công nghệ số và ứng dụng trí tuệ nhân tạo"</em>, 
                                 mình nhận ra công nghệ không hề khô khan mà có một vẻ đẹp mộc mạc và bay bổng riêng. Nó giống như những gợn nước mát trong nắng hạ, 
                                 có khả năng nâng đỡ, chắp cánh cho việc học ngoại ngữ trở nên trực quan, sinh động hơn bao giờ hết.
                             </p>
@@ -269,12 +269,12 @@
                         <!-- Mini facts grid -->
                         <div class="grid grid-cols-2 gap-4 mt-8 pt-6 border-t border-white border-opacity-10">
                             <div>
-                                <span class="text-xs text-gray-400 block uppercase">Định hướng nghề nghiệp</span>
-                                <span class="text-white font-medium text-sm md:text-base">Sư phạm & Biên dịch Tiếng Trung 4.0</span>
+                                <span class="text-xs opacity-60 block uppercase">Định hướng nghề nghiệp</span>
+                                <span class="font-medium text-sm md:text-base">Sư phạm & Biên dịch Tiếng Trung 4.0</span>
                             </div>
                             <div>
-                                <span class="text-xs text-gray-400 block uppercase">Triết lý sống</span>
-                                <span class="text-white font-medium text-sm md:text-base">Tự do tư duy, vững vàng đạo đức</span>
+                                <span class="text-xs opacity-60 block uppercase">Triết lý sống</span>
+                                <span class="font-medium text-sm md:text-base">Tự do tư duy, vững vàng đạo đức</span>
                             </div>
                         </div>
                     </div>
@@ -289,16 +289,16 @@
         <div class="max-w-7xl mx-auto">
             
             <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Tuyển Tập Bài Tập 🌿</h2>
-                <p class="text-gray-300 font-light">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">Tuyển Tập Bài Tập 🌿</h2>
+                <p class="font-light opacity-90">
                     Mỗi bài tập là một trải nghiệm mở rộng thế giới quan số học. Khám phá và nhấp vào từng mục để xem nhật ký hành trình chi tiết của mình.
                 </p>
                 
-                <!-- Special requested button before Assignments showcase section -->
+                <!-- Special requested button before Assignments showcase section (styled glassmorphic with white text) -->
                 <div class="mt-8">
                     <a href="https://drive.google.com/drive/folders/1hS7iVECTdbsncSj9MIBWLAhmTn9MZoDL?usp=drive_link" 
                        target="_blank" 
-                       class="inline-flex items-center gap-3 text-sm font-semibold px-8 py-3.5 rounded-full bg-accent-emerald text-black shadow-lg hover:opacity-90 transition-opacity duration-200">
+                       class="inline-flex items-center gap-3 text-sm font-semibold px-8 py-3.5 rounded-full glass-panel hover:bg-white hover:bg-opacity-10 shadow-lg transition-all duration-300">
                         <i class="fab fa-google-drive text-lg"></i>
                         <span>Xem bài tập trên GG drive</span>
                     </a>
@@ -308,16 +308,16 @@
             <!-- TAB FILTERS -->
             <div class="flex justify-center gap-3 mb-10 overflow-x-auto pb-4 px-2">
                 <button class="px-5 py-2 rounded-full text-xs md:text-sm font-medium transition-all duration-300"
-                        :class="activeTab === 'all' ? 'bg-white text-black' : 'glass-panel text-white hover:bg-white hover:bg-opacity-5'"
+                        :class="activeTab === 'all' ? 'bg-white bg-opacity-20 border border-white' : 'glass-panel hover:bg-white hover:bg-opacity-10'"
                         @click="activeTab = 'all'">Tất cả</button>
                 <button class="px-5 py-2 rounded-full text-xs md:text-sm font-medium transition-all duration-300"
-                        :class="activeTab === 'search' ? 'bg-white text-black' : 'glass-panel text-white hover:bg-white hover:bg-opacity-5'"
+                        :class="activeTab === 'search' ? 'bg-white bg-opacity-20 border border-white' : 'glass-panel hover:bg-white hover:bg-opacity-10'"
                         @click="activeTab = 'search'">Nghiên cứu & Học thuật</button>
                 <button class="px-5 py-2 rounded-full text-xs md:text-sm font-medium transition-all duration-300"
-                        :class="activeTab === 'collab' ? 'bg-white text-black' : 'glass-panel text-white hover:bg-white hover:bg-opacity-5'"
+                        :class="activeTab === 'collab' ? 'bg-white bg-opacity-20 border border-white' : 'glass-panel hover:bg-white hover:bg-opacity-10'"
                         @click="activeTab = 'collab'">Hợp tác & Kỹ năng số</button>
                 <button class="px-5 py-2 rounded-full text-xs md:text-sm font-medium transition-all duration-300"
-                        :class="activeTab === 'ai' ? 'bg-white text-black' : 'glass-panel text-white hover:bg-white hover:bg-opacity-5'"
+                        :class="activeTab === 'ai' ? 'bg-white bg-opacity-20 border border-white' : 'glass-panel hover:bg-white hover:bg-opacity-10'"
                         @click="activeTab = 'ai'">Trí tuệ nhân tạo (AI)</button>
             </div>
 
@@ -330,15 +330,15 @@
                      x-transition:enter="transition duration-400" x-transition:enter-start="opacity-0 scale-95">
                     <div>
                         <div class="flex justify-between items-start mb-4">
-                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-accent-emerald bg-opacity-10 accent-emerald">Bài 1</span>
-                            <span class="text-xs text-gray-400">File & Folder</span>
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-white bg-opacity-10 border border-white border-opacity-20">Bài 1</span>
+                            <span class="text-xs opacity-60">File & Folder</span>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-2">Thao tác cơ bản với tệp tin và thư mục</h3>
-                        <p class="text-gray-300 font-light text-sm mb-6 leading-relaxed">
+                        <h3 class="text-xl font-bold mb-2">Thao tác cơ bản với tệp tin và thư mục</h3>
+                        <p class="font-light text-sm mb-6 leading-relaxed opacity-80">
                             Khởi đầu sự ngăn nắp và khoa học bằng cách tổ chức cây thư mục làm việc, quản lý sao lưu, di chuyển tệp ghi chú quan trọng.
                         </p>
                     </div>
-                    <button @click="openModal = 1" class="text-xs font-semibold accent-emerald hover:underline flex items-center gap-1 self-start">
+                    <button @click="openModal = 1" class="text-xs font-semibold hover:underline flex items-center gap-1 self-start">
                         Xem nhật trình chi tiết <i class="fas fa-chevron-right text-[10px]"></i>
                     </button>
                 </div>
@@ -349,15 +349,15 @@
                      x-transition:enter="transition duration-400" x-transition:enter-start="opacity-0 scale-95">
                     <div>
                         <div class="flex justify-between items-start mb-4">
-                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-accent-coral bg-opacity-10 accent-coral">Bài 2</span>
-                            <span class="text-xs text-gray-400">Research</span>
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-white bg-opacity-10 border border-white border-opacity-20">Bài 2</span>
+                            <span class="text-xs opacity-60">Research</span>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-2">Đánh giá độ tin cậy nguồn tin học thuật</h3>
-                        <p class="text-gray-300 font-light text-sm mb-6 leading-relaxed">
+                        <h3 class="text-xl font-bold mb-2">Đánh giá độ tin cậy nguồn tin học thuật</h3>
+                        <p class="font-light text-sm mb-6 leading-relaxed opacity-80">
                             Khảo sát 11 tài liệu nghiên cứu phương pháp dạy học từ vựng tiếng Trung (CFL). Lập bộ tiêu chí đánh giá nghiêm ngặt, lọc cát tìm vàng.
                         </p>
                     </div>
-                    <button @click="openModal = 2" class="text-xs font-semibold accent-coral hover:underline flex items-center gap-1 self-start">
+                    <button @click="openModal = 2" class="text-xs font-semibold hover:underline flex items-center gap-1 self-start">
                         Xem nhật trình chi tiết <i class="fas fa-chevron-right text-[10px]"></i>
                     </button>
                 </div>
@@ -368,15 +368,15 @@
                      x-transition:enter="transition duration-400" x-transition:enter-start="opacity-0 scale-95">
                     <div>
                         <div class="flex justify-between items-start mb-4">
-                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-accent-emerald bg-opacity-10 accent-emerald">Bài 3</span>
-                            <span class="text-xs text-gray-400">Prompting</span>
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-white bg-opacity-10 border border-white border-opacity-20">Bài 3</span>
+                            <span class="text-xs opacity-60">Prompting</span>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-2">Làm chủ nghệ thuật giao tiếp với mô hình AI</h3>
-                        <p class="text-gray-300 font-light text-sm mb-6 leading-relaxed">
+                        <h3 class="text-xl font-bold mb-2">Làm chủ nghệ thuật giao tiếp với mô hình AI</h3>
+                        <p class="font-light text-sm mb-6 leading-relaxed opacity-80">
                             Xây dựng 3 cấp độ prompt có cấu trúc chặt chẽ để tóm tắt văn bản HSK4, giảng giải ngữ pháp "把字句" và thiết kế câu đố thành ngữ HSK5.
                         </p>
                     </div>
-                    <button @click="openModal = 3" class="text-xs font-semibold accent-emerald hover:underline flex items-center gap-1 self-start">
+                    <button @click="openModal = 3" class="text-xs font-semibold hover:underline flex items-center gap-1 self-start">
                         Xem nhật trình chi tiết <i class="fas fa-chevron-right text-[10px]"></i>
                     </button>
                 </div>
@@ -387,15 +387,15 @@
                      x-transition:enter="transition duration-400" x-transition:enter-start="opacity-0 scale-95">
                     <div>
                         <div class="flex justify-between items-start mb-4">
-                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-accent-coral bg-opacity-10 accent-coral">Bài 4</span>
-                            <span class="text-xs text-gray-400">Collaboration</span>
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-white bg-opacity-10 border border-white border-opacity-20">Bài 4</span>
+                            <span class="text-xs opacity-60">Collaboration</span>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-2">Sử dụng công cụ trực tuyến trong dự án nhóm</h3>
-                        <p class="text-gray-300 font-light text-sm mb-6 leading-relaxed">
+                        <h3 class="text-xl font-bold mb-2">Sử dụng công cụ trực tuyến trong dự án nhóm</h3>
+                        <p class="font-light text-sm mb-6 leading-relaxed opacity-80">
                             Dẫn dắt thành công nhóm 10 thành viên hoàn thành đề cương tiểu luận Nhập môn Việt ngữ thông qua Google Workspace, MS Teams và Discord.
                         </p>
                     </div>
-                    <button @click="openModal = 4" class="text-xs font-semibold accent-coral hover:underline flex items-center gap-1 self-start">
+                    <button @click="openModal = 4" class="text-xs font-semibold hover:underline flex items-center gap-1 self-start">
                         Xem nhật trình chi tiết <i class="fas fa-chevron-right text-[10px]"></i>
                     </button>
                 </div>
@@ -406,15 +406,15 @@
                      x-transition:enter="transition duration-400" x-transition:enter-start="opacity-0 scale-95">
                     <div>
                         <div class="flex justify-between items-start mb-4">
-                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-accent-emerald bg-opacity-10 accent-emerald">Bài 5</span>
-                            <span class="text-xs text-gray-400">GenAI Design</span>
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-white bg-opacity-10 border border-white border-opacity-20">Bài 5</span>
+                            <span class="text-xs opacity-60">GenAI Design</span>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-2">Sáng tạo nội dung số "Học Tiếng Trung 4.0"</h3>
-                        <p class="text-gray-300 font-light text-sm mb-6 leading-relaxed">
+                        <h3 class="text-xl font-bold mb-2">Sáng tạo nội dung số "Học Tiếng Trung 4.0"</h3>
+                        <p class="font-light text-sm mb-6 leading-relaxed opacity-80">
                             Kiến tạo sản phẩm Infographic độc bản, kết hợp sự hỗ trợ hình ảnh của Canva AI, cấu trúc của Gemini với tư duy thẩm mỹ đậm nét cá nhân.
                         </p>
                     </div>
-                    <button @click="openModal = 5" class="text-xs font-semibold accent-emerald hover:underline flex items-center gap-1 self-start">
+                    <button @click="openModal = 5" class="text-xs font-semibold hover:underline flex items-center gap-1 self-start">
                         Xem nhật trình chi tiết <i class="fas fa-chevron-right text-[10px]"></i>
                     </button>
                 </div>
@@ -425,15 +425,15 @@
                      x-transition:enter="transition duration-400" x-transition:enter-start="opacity-0 scale-95">
                     <div>
                         <div class="flex justify-between items-start mb-4">
-                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-accent-coral bg-opacity-10 accent-coral">Bài 6</span>
-                            <span class="text-xs text-gray-400">AI Ethics</span>
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-white bg-opacity-10 border border-white border-opacity-20">Bài 6</span>
+                            <span class="text-xs opacity-60">AI Ethics</span>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-2">Sử dụng trí tuệ nhân tạo có trách nhiệm</h3>
-                        <p class="text-gray-300 font-light text-sm mb-6 leading-relaxed">
+                        <h3 class="text-xl font-bold mb-2">Sử dụng trí tuệ nhân tạo có trách nhiệm</h3>
+                        <p class="font-light text-sm mb-6 leading-relaxed opacity-80">
                             Nghiên cứu chính sách AI học thuật (VNU/HUST vs Harvard/Oxford). Đồng thời kiến tạo bộ 6 nguyên tắc cá nhân vững chắc về liêm chính học thuật.
                         </p>
                     </div>
-                    <button @click="openModal = 6" class="text-xs font-semibold accent-coral hover:underline flex items-center gap-1 self-start">
+                    <button @click="openModal = 6" class="text-xs font-semibold hover:underline flex items-center gap-1 self-start">
                         Xem nhật trình chi tiết <i class="fas fa-chevron-right text-[10px]"></i>
                     </button>
                 </div>
@@ -446,49 +446,49 @@
     <section class="py-24 px-6 relative z-10" id="reflection">
         <div class="max-w-5xl mx-auto">
             <div class="glass-panel rounded-3xl p-8 md:p-12 relative overflow-hidden shadow-2xl">
-                <div class="absolute top-0 right-0 w-48 h-48 bg-accent-coral opacity-5 rounded-full filter blur-3xl pointer-events-none"></div>
+                <div class="absolute top-0 right-0 w-48 h-48 bg-white opacity-5 rounded-full filter blur-3xl pointer-events-none"></div>
 
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Góc Nhìn Nhìn Lại & Suy Ngẫm 🌸</h2>
-                    <p class="text-gray-300 font-light max-w-2xl mx-auto text-sm md:text-base">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Góc Nhìn Nhìn Lại & Suy Ngẫm 🌸</h2>
+                    <p class="max-w-2xl mx-auto text-sm md:text-base opacity-90">
                         Chặng đường này giúp mình hoàn thiện bản thân không chỉ ở mặt kỹ thuật số, mà còn ở cách định vị chính mình trước sự chuyển mình mạnh mẽ của thời đại AI.
                     </p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="glass-card p-6 rounded-2xl">
-                        <div class="w-10 h-10 rounded-full bg-accent-emerald bg-opacity-15 flex items-center justify-center mb-4">
-                            <i class="fas fa-star accent-emerald"></i>
+                        <div class="w-10 h-10 rounded-full bg-white bg-opacity-10 flex items-center justify-center mb-4">
+                            <i class="fas fa-star"></i>
                         </div>
-                        <h4 class="text-lg font-semibold text-white mb-2">Kỹ năng tích lũy</h4>
-                        <p class="text-gray-300 font-light text-sm leading-relaxed">
+                        <h4 class="text-lg font-semibold mb-2">Kỹ năng tích lũy</h4>
+                        <p class="font-light text-sm leading-relaxed opacity-90">
                             Tự tin trong việc phân cấp tệp tin khoa học, đánh giá nguồn tài liệu học thuật theo tiêu chí sắc bén, tối ưu hóa câu lệnh AI chuẩn logic và điều phối dự án nhóm mượt mà.
                         </p>
                     </div>
 
                     <div class="glass-card p-6 rounded-2xl">
-                        <div class="w-10 h-10 rounded-full bg-accent-coral bg-opacity-15 flex items-center justify-center mb-4">
-                            <i class="fas fa-shield-alt accent-coral"></i>
+                        <div class="w-10 h-10 rounded-full bg-white bg-opacity-10 flex items-center justify-center mb-4">
+                            <i class="fas fa-shield-alt"></i>
                         </div>
-                        <h4 class="text-lg font-semibold text-white mb-2">Đạo đức học thuật</h4>
-                        <p class="text-gray-300 font-light text-sm leading-relaxed">
+                        <h4 class="text-lg font-semibold mb-2">Đạo đức học thuật</h4>
+                        <p class="font-light text-sm leading-relaxed opacity-90">
                             Thấu hiểu và nghiêm túc tuân thủ ranh giới giữa việc "sử dụng AI làm trợ lý" và "phụ thuộc công nghệ gây lười tư duy". Đảm bảo mọi dòng chữ do AI tạo ra đều qua rà soát kỹ lưỡng.
                         </p>
                     </div>
 
                     <div class="glass-card p-6 rounded-2xl">
-                        <div class="w-10 h-10 rounded-full bg-accent-emerald bg-opacity-15 flex items-center justify-center mb-4">
-                            <i class="fas fa-compass accent-emerald"></i>
+                        <div class="w-10 h-10 rounded-full bg-white bg-opacity-10 flex items-center justify-center mb-4">
+                            <i class="fas fa-compass"></i>
                         </div>
-                        <h4 class="text-lg font-semibold text-white mb-2">Định hướng mai sau</h4>
-                        <p class="text-gray-300 font-light text-sm leading-relaxed">
+                        <h4 class="text-lg font-semibold mb-2">Định hướng mai sau</h4>
+                        <p class="font-light text-sm leading-relaxed opacity-90">
                             Sẵn sàng đón đầu và tích hợp AI vào quá trình học tập ngữ pháp, luyện âm và giảng dạy tiếng Trung, biến những mô hình ảo thành những người bạn bản địa đầy nhiệt thành.
                         </p>
                     </div>
                 </div>
 
                 <div class="mt-12 text-center pt-8 border-t border-white border-opacity-10">
-                    <p class="text-sm text-gray-300 font-light italic">
+                    <p class="text-sm font-light italic opacity-85">
                         "Giữ cho tâm hồn trong và tĩnh lặng như dòng nước, nhưng không ngừng chuyển mình mạnh mẽ theo thế sự."
                     </p>
                 </div>
@@ -500,15 +500,15 @@
     <footer class="py-12 border-t border-white border-opacity-10 z-10 relative bg-black bg-opacity-60">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
             <div>
-                <p class="text-sm text-gray-400">© 2026 Nguyễn Thuý Hằng. ULIS - ĐHQGHN.</p>
-                <p class="text-xs text-gray-500 mt-1">Được thiết kế đầy tâm huyết với phong cách hiện đại mộng mơ.</p>
+                <p class="text-sm opacity-80">© 2026 Nguyễn Thuý Hằng. ULIS - ĐHQGHN.</p>
+                <p class="text-xs opacity-60 mt-1">Được thiết kế đầy tâm huyết với phong cách hiện đại mộng mơ.</p>
             </div>
             
             <div class="flex gap-4">
-                <a href="https://drive.google.com/drive/folders/1hS7iVECTdbsncSj9MIBWLAhmTn9MZoDL?usp=drive_link" target="_blank" class="w-8 h-8 rounded-full glass-panel flex items-center justify-center text-white hover:text-accent-emerald transition-colors duration-200">
+                <a href="https://drive.google.com/drive/folders/1hS7iVECTdbsncSj9MIBWLAhmTn9MZoDL?usp=drive_link" target="_blank" class="w-8 h-8 rounded-full glass-panel flex items-center justify-center hover:bg-white hover:bg-opacity-10 transition-colors duration-200">
                     <i class="fab fa-google-drive"></i>
                 </a>
-                <a href="#" class="w-8 h-8 rounded-full glass-panel flex items-center justify-center text-white hover:text-accent-coral transition-colors duration-200">
+                <a href="#" class="w-8 h-8 rounded-full glass-panel flex items-center justify-center hover:bg-white hover:bg-opacity-10 transition-colors duration-200">
                     <i class="fas fa-arrow-up"></i>
                 </a>
             </div>
@@ -523,25 +523,25 @@
          x-show="openModal === 1" x-transition:enter="transition duration-300" x-transition:leave="transition duration-200" style="display: none;">
         <div class="glass-panel-dark max-w-2xl w-full max-h-[85vh] overflow-y-auto rounded-3xl p-6 md:p-8 relative"
              @click.away="openModal = null">
-            <button @click="openModal = null" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+            <button @click="openModal = null" class="absolute top-4 right-4 hover:opacity-85">
                 <i class="fas fa-times text-xl"></i>
             </button>
-            <span class="text-xs font-semibold text-accent-emerald uppercase tracking-wider block mb-2">Thực Hành</span>
-            <h3 class="text-2xl font-bold text-white mb-4">Bài 1: Làm chủ không gian số với quản lý tệp tin</h3>
+            <span class="text-xs font-semibold uppercase tracking-wider block mb-2 opacity-80">Thực Hành</span>
+            <h3 class="text-2xl font-bold mb-4">Bài 1: Làm chủ không gian số với quản lý tệp tin</h3>
             
-            <div class="space-y-4 text-gray-300 font-light text-sm md:text-base leading-relaxed">
-                <h4 class="text-white font-semibold mt-4">Hành trình thực tế</h4>
+            <div class="space-y-4 font-light text-sm md:text-base leading-relaxed opacity-95">
+                <h4 class="font-semibold mt-4">Hành trình thực tế</h4>
                 <p>
                     Bước đầu tiên trong hành trình công nghệ số không gì quan trọng bằng việc làm quen với việc sắp xếp dữ liệu khoa học. 
-                    Tại ổ đĩa làm việc chính, mình đã tạo thư mục làm việc chuyên biệt mang tên <code class="bg-white bg-opacity-10 px-2 py-0.5 rounded text-white font-mono">ThucHanh_NguyenThuyHang</code>.
+                    Tại ổ đĩa làm việc chính, mình đã tạo thư mục làm việc chuyên biệt mang tên <code class="bg-white bg-opacity-10 px-2 py-0.5 rounded font-mono">ThucHanh_NguyenThuyHang</code>.
                 </p>
                 <p>
-                    Tại đây, mình tạo tệp tin văn bản nháp <code class="bg-white bg-opacity-10 px-2 py-0.5 rounded text-white font-mono">GhiChu.txt</code>, 
-                    sau đó thực hiện thao tác đổi tên thành <code class="bg-white bg-opacity-10 px-2 py-0.5 rounded text-white font-mono">GhiChuQuanTrong.txt</code>. 
-                    Để rèn luyện khả năng quản lý thư mục con, mình tiếp tục tạo thư mục con <code class="bg-white bg-opacity-10 px-2 py-0.5 rounded text-white font-mono">TaiLieu</code>, 
-                    sao chép tệp ghi chú sang đó, tạo tệp di chuyển <code class="bg-white bg-opacity-10 px-2 py-0.5 rounded text-white font-mono">DiChuyen.txt</code> và tiến hành thực nghiệm cắt và dán, xóa tệp tạm thời vào Thùng rác, khôi phục lại để hiểu trọn vẹn vòng đời tệp tin trên Windows.
+                    Tại đây, mình tạo tệp tin văn bản nháp <code class="bg-white bg-opacity-10 px-2 py-0.5 rounded font-mono">GhiChu.txt</code>, 
+                    sau đó thực hiện thao tác đổi tên thành <code class="bg-white bg-opacity-10 px-2 py-0.5 rounded font-mono">GhiChuQuanTrong.txt</code>. 
+                    Để rèn luyện khả năng quản lý thư mục con, mình tiếp tục tạo thư mục con <code class="bg-white bg-opacity-10 px-2 py-0.5 rounded font-mono">TaiLieu</code>, 
+                    sao chép tệp ghi chú sang đó, tạo tệp di chuyển <code class="bg-white bg-opacity-10 px-2 py-0.5 rounded font-mono">DiChuyen.txt</code> và tiến hành thực nghiệm cắt và dán, xóa tệp tạm thời vào Thùng rác, khôi phục lại để hiểu trọn vẹn vòng đời tệp tin trên Windows.
                 </p>
-                <h4 class="text-white font-semibold mt-4">Bài học tâm đắc</h4>
+                <h4 class="font-semibold mt-4">Bài học tâm đắc</h4>
                 <p>
                     Khoa học máy tính bắt đầu từ việc tối giản và tối ưu cách tổ chức. Việc thiết lập thói quen đặt tên rõ ràng, tổ chức thư mục logic giúp mình quản lý dữ liệu nghiên cứu tốt hơn gấp nhiều lần.
                 </p>
@@ -554,25 +554,25 @@
          x-show="openModal === 2" x-transition:enter="transition duration-300" x-transition:leave="transition duration-200" style="display: none;">
         <div class="glass-panel-dark max-w-3xl w-full max-h-[85vh] overflow-y-auto rounded-3xl p-6 md:p-8 relative"
              @click.away="openModal = null">
-            <button @click="openModal = null" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+            <button @click="openModal = null" class="absolute top-4 right-4 hover:opacity-85">
                 <i class="fas fa-times text-xl"></i>
             </button>
-            <span class="text-xs font-semibold text-accent-coral uppercase tracking-wider block mb-2">Học Thuật</span>
-            <h3 class="text-2xl font-bold text-white mb-4">Bài 2: Gạn đục khơi trong - Bản đồ nguồn tin CFL</h3>
+            <span class="text-xs font-semibold uppercase tracking-wider block mb-2 opacity-80">Học Thuật</span>
+            <h3 class="text-2xl font-bold mb-4">Bài 2: Gạn đục khơi trong - Bản đồ nguồn tin CFL</h3>
             
-            <div class="space-y-4 text-gray-300 font-light text-sm md:text-base leading-relaxed">
-                <h4 class="text-white font-semibold mt-4">Nội dung đề tài</h4>
+            <div class="space-y-4 font-light text-sm md:text-base leading-relaxed opacity-95">
+                <h4 class="font-semibold mt-4">Nội dung đề tài</h4>
                 <p>
-                    Tìm kiếm và chọn lọc nguồn thông tin học thuật đáng tin cậy về đề tài: <strong class="text-white">"Phương pháp dạy và học từ vựng tiếng Trung hiệu quả cho người học ngoại ngữ (CFL)"</strong>, tập trung vào phạm vi nghiên cứu từ năm 2010 đến 2024.
+                    Tìm kiếm và chọn lọc nguồn thông tin học thuật đáng tin cậy về đề tài: <strong>"Phương pháp dạy và học từ vựng tiếng Trung hiệu quả cho người học ngoại ngữ (CFL)"</strong>, tập trung vào phạm vi nghiên cứu từ năm 2010 đến 2024.
                 </p>
-                <h4 class="text-white font-semibold mt-4">Phương pháp tìm kiếm & Đánh giá</h4>
+                <h4 class="font-semibold mt-4">Phương pháp tìm kiếm & Đánh giá</h4>
                 <p>
                     Mình đã khai thác các cơ sở dữ liệu học thuật hàng đầu như Google Scholar, ResearchGate và các tạp chí ngôn ngữ học lớn (Journal of Chinese Language Teaching, Language Learning Journal), cùng các nguồn mở chính thống như Cambridge, Hanban...
                 </p>
                 <p>
                     Tổng cộng 11 tài liệu quan trọng của các học giả uy tín (Nation, Webb, Laufer, Schmitt, Zhang...) đã được lập bảng đối chiếu cụ thể theo 5 tiêu chí: Độ uy tín tác giả, danh tiếng nhà xuất bản, phương pháp nghiên cứu rõ ràng, số lượng trích dẫn nhiều, và tính cập nhật gần đây (≤10–15 năm).
                 </p>
-                <h4 class="text-white font-semibold mt-4">Bài học tâm đắc</h4>
+                <h4 class="font-semibold mt-4">Bài học tâm đắc</h4>
                 <p>
                     Sách của Nation, Schmitt hay các bài báo quốc tế luôn là điểm tựa học thuật vững chắc nhất nhờ tính xác thực cao. Ngược lại, nguồn Internet mở tuy nhanh và hữu ích nhưng bắt buộc phải qua khâu kiểm chứng gắt gao trước khi trích dẫn.
                 </p>
@@ -585,30 +585,30 @@
          x-show="openModal === 3" x-transition:enter="transition duration-300" x-transition:leave="transition duration-200" style="display: none;">
         <div class="glass-panel-dark max-w-3xl w-full max-h-[85vh] overflow-y-auto rounded-3xl p-6 md:p-8 relative"
              @click.away="openModal = null">
-            <button @click="openModal = null" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+            <button @click="openModal = null" class="absolute top-4 right-4 hover:opacity-85">
                 <i class="fas fa-times text-xl"></i>
             </button>
-            <span class="text-xs font-semibold text-accent-emerald uppercase tracking-wider block mb-2">Prompt Engineering</span>
-            <h3 class="text-2xl font-bold text-white mb-4">Bài 3: Cú hích ngôn ngữ - Kỹ thuật viết Prompt siêu cấp</h3>
+            <span class="text-xs font-semibold uppercase tracking-wider block mb-2 opacity-80">Prompt Engineering</span>
+            <h3 class="text-2xl font-bold mb-4">Bài 3: Cú hích ngôn ngữ - Kỹ thuật viết Prompt siêu cấp</h3>
             
-            <div class="space-y-4 text-gray-300 font-light text-sm md:text-base leading-relaxed">
-                <h4 class="text-white font-semibold mt-4">Ý tưởng dự án</h4>
+            <div class="space-y-4 font-light text-sm md:text-base leading-relaxed opacity-95">
+                <h4 class="font-semibold mt-4">Ý tưởng dự án</h4>
                 <p>
                     Mục tiêu tối thượng là chuyển hoá AI từ một cỗ máy trả lời sáo rỗng thành một giáo sư ngữ pháp hoặc một chuyên gia sư phạm uyên bác thông qua công thức viết Prompt hoàn hảo: <strong>ROLE + CONTEXT + TASK + CONSTRAINTS</strong>.
                 </p>
-                <h4 class="text-white font-semibold mt-4">3 Tác vụ thực nghiệm xuất sắc</h4>
+                <h4 class="font-semibold mt-4">3 Tác vụ thực nghiệm xuất sắc</h4>
                 <ul class="list-decimal list-inside space-y-2 pl-2">
                     <li>
-                        <strong class="text-white">Tóm tắt bài đọc "理想工作":</strong> Áp dụng Role Prompting (đóng vai giảng viên) kết hợp ràng buộc độ dài 80-100 từ tiếng Việt và trích xuất 5 từ vựng HSK4 quan trọng có giải nghĩa rõ ràng.
+                        <strong>Tóm tắt bài đọc "理想工作":</strong> Áp dụng Role Prompting (đóng vai giảng viên) kết hợp ràng buộc độ dài 80-100 từ tiếng Việt và trích xuất 5 từ vựng HSK4 quan trọng có giải nghĩa rõ ràng.
                     </li>
                     <li>
-                        <strong class="text-white">Giải thích ngữ pháp "把字句":</strong> Kết hợp kỹ thuật tạo tương tự (Analogy Generation) so sánh trực tiếp với kết cấu tiếng Việt và phân tích cấu trúc, chỉ ra 5 lỗi thường gặp cho sinh viên năm nhất dễ tiếp thu nhất.
+                        <strong>Giải thích ngữ pháp "把字句":</strong> Kết hợp kỹ thuật tạo tương tự (Analogy Generation) so sánh trực tiếp với kết cấu tiếng Việt và phân tích cấu trúc, chỉ ra 5 lỗi thường gặp cho sinh viên năm nhất dễ tiếp thu nhất.
                     </li>
                     <li>
-                        <strong class="text-white">Thiết kế bộ câu hỏi thành ngữ HSK5:</strong> Tích hợp Thang đo Bloom (Nhận biết, Vận dụng, Phân biệt cặp dễ nhầm, Tình huống thực tế) để tạo hệ thống câu hỏi có chiều sâu tự kiểm tra lỗ hổng kiến thức.
+                        <strong>Thiết kế bộ câu hỏi thành ngữ HSK5:</strong> Tích hợp Thang đo Bloom (Nhận biết, Vận dụng, Phân biệt cặp dễ nhầm, Tình huống thực tế) để tạo hệ thống câu hỏi có chiều sâu tự kiểm tra lỗ hổng kiến thức.
                     </li>
                 </ul>
-                <h4 class="text-white font-semibold mt-4">Bài học tâm đắc</h4>
+                <h4 class="font-semibold mt-4">Bài học tâm đắc</h4>
                 <p>
                     Khi chúng ta chỉ định vai trò cụ thể, giới hạn độ dài chặt chẽ và sử dụng cấu trúc CoT (Chain of Thought), AI sẽ cho ra những câu trả lời có tính cá nhân hoá rất cao, tránh xa hiện tượng ảo giác (hallucination).
                 </p>
@@ -621,25 +621,25 @@
          x-show="openModal === 4" x-transition:enter="transition duration-300" x-transition:leave="transition duration-200" style="display: none;">
         <div class="glass-panel-dark max-w-2xl w-full max-h-[85vh] overflow-y-auto rounded-3xl p-6 md:p-8 relative"
              @click.away="openModal = null">
-            <button @click="openModal = null" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+            <button @click="openModal = null" class="absolute top-4 right-4 hover:opacity-85">
                 <i class="fas fa-times text-xl"></i>
             </button>
-            <span class="text-xs font-semibold text-accent-coral uppercase tracking-wider block mb-2">Hợp Tác</span>
-            <h3 class="text-2xl font-bold text-white mb-4">Bài 4: Sức mạnh đồng đội qua không gian số</h3>
+            <span class="text-xs font-semibold uppercase tracking-wider block mb-2 opacity-80">Hợp Tác</span>
+            <h3 class="text-2xl font-bold mb-4">Bài 4: Sức mạnh đồng đội qua không gian số</h3>
             
-            <div class="space-y-4 text-gray-300 font-light text-sm md:text-base leading-relaxed">
-                <h4 class="text-white font-semibold mt-4">Tổng quan dự án</h4>
+            <div class="space-y-4 font-light text-sm md:text-base leading-relaxed opacity-95">
+                <h4 class="font-semibold mt-4">Tổng quan dự án</h4>
                 <p>
-                    Đảm nhiệm vai trò <strong class="text-white">Nhóm trưởng điều phối 10 thành viên</strong> hoàn thành bài tiểu luận môn Nhập môn Việt ngữ chỉ trong vòng 1 tuần ngắn ngủi.
+                    Đảm nhiệm vai trò <strong>Nhóm trưởng điều phối 10 thành viên</strong> hoàn thành bài tiểu luận môn Nhập môn Việt ngữ chỉ trong vòng 1 tuần ngắn ngủi.
                 </p>
-                <h4 class="text-white font-semibold mt-4">Quy trình sử dụng hệ sinh thái số</h4>
+                <h4 class="font-semibold mt-4">Quy trình sử dụng hệ sinh thái số</h4>
                 <ul class="list-disc list-inside space-y-2 pl-2">
-                    <li><strong class="text-white">Google Sheets:</strong> Làm bảng Masterplan phân công công việc chi tiết, theo dõi tiến độ từng phần của mỗi thành viên một cách trực quan.</li>
-                    <li><strong class="text-white">Google Docs:</strong> Soạn thảo cộng tác thời gian thực, xây dựng kịch bản, chỉnh sửa bố cục và trao đổi qua phần bình luận thông minh.</li>
-                    <li><strong class="text-white">Google Drive:</strong> Lưu trữ tài nguyên, tải lên các tài liệu nghiên cứu chuyên ngành và phân chia thư mục an toàn.</li>
-                    <li><strong class="text-white">Microsoft Teams & Discord:</strong> Giao tiếp nhanh, họp trực tuyến thảo luận tiến độ và hỗ trợ giải quyết thắc mắc cho nhau.</li>
+                    <li><strong>Google Sheets:</strong> Làm bảng Masterplan phân công công việc chi tiết, theo dõi tiến độ từng phần của mỗi thành viên một cách trực quan.</li>
+                    <li><strong>Google Docs:</strong> Soạn thảo cộng tác thời gian thực, xây dựng kịch bản, chỉnh sửa bố cục và trao đổi qua phần bình luận thông minh.</li>
+                    <li><strong>Google Drive:</strong> Lưu trữ tài nguyên, tải lên các tài liệu nghiên cứu chuyên ngành và phân chia thư mục an toàn.</li>
+                    <li><strong>Microsoft Teams & Discord:</strong> Giao tiếp nhanh, họp trực tuyến thảo luận tiến độ và hỗ trợ giải quyết thắc mắc cho nhau.</li>
                 </ul>
-                <h4 class="text-white font-semibold mt-4">Thách thức & Giải pháp</h4>
+                <h4 class="font-semibold mt-4">Thách thức & Giải pháp</h4>
                 <p>
                     Xung đột nội dung xảy ra khi nhiều người cùng chỉnh sửa đồng thời đã được mình giải quyết bằng cách chia nhỏ khu vực phụ trách và thống nhất việc bình luận trước khi sửa bài của người khác. Sự lệch múi giờ hay lịch học khác nhau được tối ưu hóa qua lịch họp cố định thông báo trước.
                 </p>
@@ -652,27 +652,27 @@
          x-show="openModal === 5" x-transition:enter="transition duration-300" x-transition:leave="transition duration-200" style="display: none;">
         <div class="glass-panel-dark max-w-3xl w-full max-h-[85vh] overflow-y-auto rounded-3xl p-6 md:p-8 relative"
              @click.away="openModal = null">
-            <button @click="openModal = null" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+            <button @click="openModal = null" class="absolute top-4 right-4 hover:opacity-85">
                 <i class="fas fa-times text-xl"></i>
             </button>
-            <span class="text-xs font-semibold text-accent-emerald uppercase tracking-wider block mb-2">Sáng Tạo</span>
-            <h3 class="text-2xl font-bold text-white mb-4">Bài 5: Sáng tạo Infographic "Học Tiếng Trung 4.0"</h3>
+            <span class="text-xs font-semibold uppercase tracking-wider block mb-2 opacity-80">Sáng Tạo</span>
+            <h3 class="text-2xl font-bold mb-4">Bài 5: Sáng tạo Infographic "Học Tiếng Trung 4.0"</h3>
             
-            <div class="space-y-4 text-gray-300 font-light text-sm md:text-base leading-relaxed">
-                <h4 class="text-white font-semibold mt-4">Mục tiêu & Ý tưởng thiết kế</h4>
+            <div class="space-y-4 font-light text-sm md:text-base leading-relaxed opacity-95">
+                <h4 class="font-semibold mt-4">Mục tiêu & Ý tưởng thiết kế</h4>
                 <p>
                     Thiết kế một Infographic trực quan với chủ đề "Học Tiếng Trung 4.0 cùng AI" nhằm giới thiệu bộ ba ứng dụng đột phá: Doubao (AI giao tiếp bản địa), Hanzi (Ứng dụng tra cứu thông minh) và Gemini (AI xây dựng lộ trình học cá nhân hóa).
                 </p>
-                <h4 class="text-white font-semibold mt-4">Quy trình ứng dụng GenAI</h4>
+                <h4 class="font-semibold mt-4">Quy trình ứng dụng GenAI</h4>
                 <p>
                     Sự can thiệp của AI đã rút ngắn thời gian làm từ 5 ngày xuống dưới 5 giờ đồng hồ nhờ sự kết hợp nhịp nhàng:
                 </p>
                 <ul class="list-disc list-inside space-y-1.5 pl-2">
-                    <li><strong class="text-white">Google Gemini:</strong> Cô đọng các luận điểm, lập cấu trúc tổng quan 4 phần chi tiết phù hợp với định dạng lưới (grid) của Infographic.</li>
-                    <li><strong class="text-white">Canva Text-to-Image:</strong> Tạo sinh hoàn toàn mới các biểu tượng 3D mang hơi hướng tương lai (chú gấu trúc robot Doubao đeo tai nghe và bút lông holographic cách điệu của Hanzi).</li>
-                    <li><strong class="text-white">Canva AI Magic Edit:</strong> Chỉnh sửa các chi tiết thừa ở phần tai nghe của robot gấu trúc đảm bảo tính đồng bộ hoàn hảo.</li>
+                    <li><strong>Google Gemini:</strong> Cô đọng các luận điểm, lập cấu trúc tổng quan 4 phần chi tiết phù hợp với định dạng lưới (grid) của Infographic.</li>
+                    <li><strong>Canva Text-to-Image:</strong> Tạo sinh hoàn toàn mới các biểu tượng 3D mang hơi hướng tương lai (chú gấu trúc robot Doubao đeo tai nghe và bút lông holographic cách điệu của Hanzi).</li>
+                    <li><strong>Canva AI Magic Edit:</strong> Chỉnh sửa các chi tiết thừa ở phần tai nghe của robot gấu trúc đảm bảo tính đồng bộ hoàn hảo.</li>
                 </ul>
-                <h4 class="text-white font-semibold mt-4">Sự can thiệp của con người (Human Touch)</h4>
+                <h4 class="font-semibold mt-4">Sự can thiệp của con người (Human Touch)</h4>
                 <p>
                     Mặc dù AI cung cấp tài nguyên, mình đã trực tiếp can thiệp hơn 50% khối lượng công việc thực tế: tự tay thiết kế lại bố cục dạng "Dòng chảy tư duy" (Mind-Flow layout), viết lại toàn bộ các prompt mẫu thực chiến dựa trên kinh nghiệm thực tế, hậu kỳ tách nền thủ công và phủ một lớp filter màu xanh cyan mờ để tạo sự đồng nhất nghệ thuật.
                 </p>
@@ -685,25 +685,25 @@
          x-show="openModal === 6" x-transition:enter="transition duration-300" x-transition:leave="transition duration-200" style="display: none;">
         <div class="glass-panel-dark max-w-3xl w-full max-h-[85vh] overflow-y-auto rounded-3xl p-6 md:p-8 relative"
              @click.away="openModal = null">
-            <button @click="openModal = null" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+            <button @click="openModal = null" class="absolute top-4 right-4 hover:opacity-85">
                 <i class="fas fa-times text-xl"></i>
             </button>
-            <span class="text-xs font-semibold text-accent-coral uppercase tracking-wider block mb-2">Đạo Đức Số</span>
-            <h3 class="text-2xl font-bold text-white mb-4">Bài 6: Mỏ neo đạo đức giữa làn sóng trí tuệ nhân tạo</h3>
+            <span class="text-xs font-semibold uppercase tracking-wider block mb-2 opacity-80">Đạo Đức Số</span>
+            <h3 class="text-2xl font-bold mb-4">Bài 6: Mỏ neo đạo đức giữa làn sóng trí tuệ nhân tạo</h3>
             
-            <div class="space-y-4 text-gray-300 font-light text-sm md:text-base leading-relaxed">
-                <h4 class="text-white font-semibold mt-4">Đối chiếu chính sách học thuật</h4>
+            <div class="space-y-4 font-light text-sm md:text-base leading-relaxed opacity-95">
+                <h4 class="font-semibold mt-4">Đối chiếu chính sách học thuật</h4>
                 <p>
                     Nghiên cứu so sánh chính sách sử dụng AI tại Việt Nam (VNU/HUST) hướng tới khuyến khích đi kèm kiểm soát (bắt buộc khai báo và trích dẫn, sinh viên tự chịu trách nhiệm 100%) so với các đại học lớn trên thế giới (Harvard/Oxford phân loại theo môn học và kết hợp vấn đáp trực tiếp).
                 </p>
-                <h4 class="text-white font-semibold mt-4">Bộ 6 Nguyên tắc sử dụng AI trách nhiệm của bản thân</h4>
+                <h4 class="font-semibold mt-4">Bộ 6 Nguyên tắc sử dụng AI trách nhiệm của bản thân</h4>
                 <ol class="list-decimal list-inside space-y-2 pl-2">
-                    <li><strong class="text-white">"Chủ thể duy nhất":</strong> Mình luôn là tác giả duy nhất và chịu trách nhiệm tối cao cho mọi nội dung nộp lên. AI chỉ đóng vai trò trợ lý tư vấn.</li>
-                    <li><strong class="text-white">"Minh bạch tuyệt đối":</strong> Khai báo và trích dẫn đầy đủ (theo chuẩn APA 7th) mọi ý tưởng hoặc đoạn văn có sự can thiệp của AI.</li>
-                    <li><strong class="text-white">"Hoài nghi khoa học":</strong> Fact-check luôn luôn, không bao giờ tin tưởng hoàn toàn số liệu AI đưa ra, luôn đối chiếu với sách báo uy tín đã qua bình duyệt.</li>
-                    <li><strong class="text-white">"Bảo mật dữ liệu":</strong> Tuyệt đối không đăng tải thông tin cá nhân hay dữ liệu mật chưa công bố của nhà trường lên AI công cộng.</li>
-                    <li><strong class="text-white">"Phát triển nội lực":</strong> Chỉ sử dụng AI sau khi bản thân đã tự suy nghĩ sâu sắc để rèn luyện tư duy nền tảng.</li>
-                    <li><strong class="text-white">"Nói không với Copy-Paste":</strong> Luôn xử lý, biên tập lại các gợi ý của AI bằng văn phong cá nhân của chính mình.</li>
+                    <li><strong>"Chủ thể duy nhất":</strong> Mình luôn là tác giả duy nhất và chịu trách nhiệm tối cao cho mọi nội dung nộp lên. AI chỉ đóng vai trò trợ lý tư vấn.</li>
+                    <li><strong>"Minh bạch tuyệt đối":</strong> Khai báo và trích dẫn đầy đủ (theo chuẩn APA 7th) mọi ý tưởng hoặc đoạn văn có sự can thiệp của AI.</li>
+                    <li><strong>"Hoài nghi khoa học":</strong> Fact-check luôn luôn, không bao giờ tin tưởng hoàn toàn số liệu AI đưa ra, luôn đối chiếu với sách báo uy tín đã qua bình duyệt.</li>
+                    <li><strong>"Bảo mật dữ liệu":</strong> Tuyệt đối không đăng tải thông tin cá nhân hay dữ liệu mật chưa công bố của nhà trường lên AI công cộng.</li>
+                    <li><strong>"Phát triển nội lực":</strong> Chỉ sử dụng AI sau khi bản thân đã tự suy nghĩ sâu sắc để rèn luyện tư duy nền tảng.</li>
+                    <li><strong>"Nói không với Copy-Paste":</strong> Luôn xử lý, biên tập lại các gợi ý của AI bằng văn phong cá nhân của chính mình.</li>
                 </ol>
             </div>
         </div>
@@ -712,14 +712,12 @@
     <!-- Mouse Interaction Ripple Simulator logic -->
     <script>
         document.addEventListener('click', function(e) {
-            // Create a elegant ripple mimicry upon clicking any element
             const wave = document.createElement('div');
             wave.className = 'water-wave';
             wave.style.left = `${e.clientX}px`;
             wave.style.top = `${e.clientY}px`;
             document.body.appendChild(wave);
             
-            // Auto remove after animation completes
             setTimeout(() => {
                 wave.remove();
             }, 2500);
