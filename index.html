@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nguyễn Thuý Hằng - Digital Portfolio</title>
+    <title>Nguyễn Thuý Hằng Portfolio</title>
     <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- Alpine.js (Quản lý trạng thái tương tác mượt mà và chuyển tab) -->
@@ -45,10 +45,8 @@
         }
 
         .glass-panel-dark {
-            background: rgba(8, 16, 14, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(10, 18, 16, 0.96);
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
         .glass-card {
@@ -158,7 +156,7 @@
                 <a href="#goals" class="text-sm font-medium hover:opacity-80 transition-opacity">Mục Tiêu</a>
                 <a href="#assignments" class="text-sm font-medium hover:opacity-80 transition-opacity">Kho Bài Tập</a>
                 <a href="#reflection" class="text-sm font-medium hover:opacity-80 transition-opacity">Tổng Kết</a>
-                <!-- Nút xem bài tập trên Google Drive -->
+                <!-- Nút xem bài tập trên Google Drive (yêu cầu đặc biệt) -->
                 <a href="https://drive.google.com/drive/folders/1hS7iVECTdbsncSj9MIBWLAhmTn9MZoDL?usp=drive_link" 
                    target="_blank" 
                    class="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-full glass-panel hover:bg-white hover:bg-opacity-10 transition-all duration-300">
@@ -190,7 +188,7 @@
         </div>
     </header>
 
-    <!-- TRANG CHỦ / HERO (Đã sửa triệt để lỗi khoảng cách và vị trí hiển thị) -->
+    <!-- TRANG CHỦ / HERO -->
     <section class="min-h-screen flex flex-col justify-center items-center pt-24 pb-32 px-6 relative overflow-hidden" id="hero">
         <div class="max-w-4xl text-center z-10 my-auto">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel mb-6 animate-pulse">
@@ -218,8 +216,8 @@
             </div>
         </div>
 
-        <!-- Biểu tượng cuộn trang (Đã cố định ở lề dưới cùng, loại bỏ chồng lấn text) -->
-        <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center pointer-events-none opacity-50 z-0">
+        <!-- Water Drop simulation element -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center pointer-events-none opacity-50 z-0">
             <span class="text-xs tracking-widest uppercase mb-2">Cuộn để cảm nhận dòng chảy</span>
             <div class="w-6 h-10 rounded-full border-2 border-white flex justify-center pt-2">
                 <div class="w-1.5 h-3 bg-white rounded-full animate-bounce"></div>
@@ -456,7 +454,7 @@
                         </div>
                         <h3 class="text-xl font-bold mb-2">Sử dụng trí tuệ nhân tạo có trách nhiệm</h3>
                         <p class="font-light text-sm mb-6 leading-relaxed opacity-80">
-                            Nghiên cứu chính sách AI học thuật (VNU/HUST vs Harvard/Oxford). Ứng dụng thực tiễn đề tài kinh tế số, thiết lập bộ nguyên tắc cá nhân.
+                            Nghiên cứu chính sách AI học thuật (VNU/HUST vs Harvard/Oxford). Đồng thời kiến tạo bộ 6 nguyên tắc cá nhân vững chắc về liêm chính học thuật.
                         </p>
                     </div>
                     <button @click="openModal = 6" class="text-xs font-semibold hover:underline flex items-center gap-1 self-start">
@@ -539,15 +537,31 @@
     </footer>
 
 
-    <!-- HỆ THỐNG MODAL CHI TIẾT BÀI TẬP -->
+    <!-- HỆ THỐNG MODAL ĐÃ ĐƯỢC THIẾT KẾ LẠI ĐỂ HOẠT ĐỘNG HOÀN HẢO VỚI SCROLL VÀ MÀN HÌNH DI ĐỘNG -->
     
-    <!-- MODAL 1 (THAO TÁC CƠ BẢN) -->
-    <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-85"
-         x-show="openModal === 1" x-transition:enter="transition duration-300" x-transition:leave="transition duration-200" style="display: none;">
-        <div class="glass-panel-dark max-w-3xl w-full max-h-[85vh] overflow-y-auto rounded-3xl p-6 md:p-8 relative"
-             @click.away="openModal = null" x-data="{ currentStep: 1 }">
-            <button @click="openModal = null" class="absolute top-4 right-4 hover:opacity-85">
-                <i class="fas fa-times text-xl"></i>
+    <!-- MODAL 1 -->
+    <div class="fixed inset-0 z-50 overflow-y-auto bg-black bg-opacity-80 backdrop-filter backdrop-blur-md p-4 flex justify-center items-start sm:items-center"
+         x-show="openModal === 1" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         @click.self="openModal = null"
+         style="display: none;">
+         
+        <div class="glass-panel-dark w-full max-w-3xl rounded-3xl p-6 md:p-10 my-8 relative transform transition-all shadow-2xl"
+             x-data="{ currentStep: 1 }"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-95">
+             
+            <button @click="openModal = null" class="absolute top-5 right-5 hover:opacity-75 focus:outline-none z-10 transition-opacity">
+                <i class="fas fa-times text-2xl"></i>
             </button>
             <span class="text-xs font-semibold uppercase tracking-wider block mb-2 opacity-80">Thực Hành Máy Tính</span>
             <h3 class="text-2xl font-bold mb-4">Bài 1: Thao tác cơ bản với tệp tin và thư mục trên Windows</h3>
@@ -559,14 +573,14 @@
                 </p>
             </div>
 
-            <!-- Trình chiếu tương tác 12 bước -->
+            <!-- Trình chiếu tương tác 12 bước xịn xò -->
             <div class="glass-panel p-5 rounded-2xl mb-6">
                 <div class="flex justify-between items-center mb-4">
                     <span class="text-sm font-bold">Bước <span x-text="currentStep"></span> / 12</span>
                     <div class="flex gap-2">
-                        <button class="px-3 py-1 rounded bg-white bg-opacity-10 hover:bg-opacity-20 text-xs"
+                        <button class="px-3 py-1 rounded bg-white bg-opacity-10 hover:bg-opacity-20 text-xs focus:outline-none"
                                 @click="currentStep = Math.max(1, currentStep - 1)">Trở lại</button>
-                        <button class="px-3 py-1 rounded bg-white bg-opacity-10 hover:bg-opacity-20 text-xs"
+                        <button class="px-3 py-1 rounded bg-white bg-opacity-10 hover:bg-opacity-20 text-xs focus:outline-none"
                                 @click="currentStep = Math.min(12, currentStep + 1)">Tiếp theo</button>
                     </div>
                 </div>
@@ -649,20 +663,36 @@
 
             <div class="space-y-4 font-light text-sm md:text-base leading-relaxed opacity-95">
                 <h4 class="font-semibold mt-4">🌿 Bài học kinh nghiệm sâu sắc:</h4>
-                <p>
+                <p class="text-gray-300">
                     Việc quản lý file hệ thống một cách có kỷ luật ngay từ những bước cơ bản nhất là nền tảng cốt lõi giúp thiết lập một quy trình làm việc bền vững, giảm thiểu tối đa rủi ro mất mát dữ liệu nghiên cứu lâu dài của sinh viên.
                 </p>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 2 (ĐÁNH GIÁ NGUỒN TIN - Thiết kế Accordion mới tự co giãn theo chiều dọc, tránh xung đột cuộn màn hình) -->
-    <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-85"
-         x-show="openModal === 2" x-transition:enter="transition duration-300" x-transition:leave="transition duration-200" style="display: none;">
-        <div class="glass-panel-dark max-w-3xl w-full max-h-[85vh] overflow-y-auto rounded-3xl p-6 md:p-8 relative"
-             @click.away="openModal = null" x-data="{ activeSource: 1 }">
-            <button @click="openModal = null" class="absolute top-4 right-4 hover:opacity-85">
-                <i class="fas fa-times text-xl"></i>
+    <!-- MODAL 2 (ĐÁNH GIÁ NGUỒN TIN - Đã chuyển sang dạng Accordion an toàn tuyệt đối cho thiết bị di động, không bị kẹt scroll) -->
+    <div class="fixed inset-0 z-50 overflow-y-auto bg-black bg-opacity-80 backdrop-filter backdrop-blur-md p-4 flex justify-center items-start sm:items-center"
+         x-show="openModal === 2" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         @click.self="openModal = null"
+         style="display: none;">
+         
+        <div class="glass-panel-dark w-full max-w-3xl rounded-3xl p-6 md:p-10 my-8 relative transform transition-all shadow-2xl"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-95"
+             x-data="{ activeAccordion: 1 }">
+             
+            <button @click="openModal = null" class="absolute top-5 right-5 hover:opacity-75 focus:outline-none z-10 transition-opacity">
+                <i class="fas fa-times text-2xl"></i>
             </button>
             <span class="text-xs font-semibold uppercase tracking-wider block mb-2 opacity-80">Đánh Giá Nguồn Tin</span>
             <h3 class="text-2xl font-bold mb-4">Bài 2: Nghiên cứu phương pháp dạy học từ vựng tiếng Trung</h3>
@@ -674,223 +704,230 @@
                 </p>
             </div>
 
-            <!-- Accordion học liệu tương thích tuyệt đối cho cả Mobile và Desktop -->
+            <p class="text-sm font-semibold mb-4">📚 Danh sách 11 học liệu nghiên cứu đã qua thẩm định:</p>
+
+            <!-- Giao diện dọc thích ứng hoàn hảo cho mọi thiết bị (Accordion) -->
             <div class="space-y-3 mb-6">
-                <!-- Học liệu 1 -->
-                <div class="glass-panel rounded-xl overflow-hidden">
-                    <button class="w-full p-4 text-left font-semibold flex justify-between items-center hover:bg-white hover:bg-opacity-5 transition-colors"
-                            @click="activeSource = (activeSource === 1 ? null : 1)">
-                        <span class="text-xs md:text-sm">1. Nation, I.S.P. (2013) — Sách chuyên khảo</span>
-                        <i class="fas" :class="activeSource === 1 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                <!-- 1. Nation (2013) -->
+                <div class="rounded-xl glass-card overflow-hidden">
+                    <button class="w-full p-4 text-left flex justify-between items-center focus:outline-none" @click="activeAccordion = (activeAccordion === 1 ? null : 1)">
+                        <span class="text-sm font-semibold">1. Nation, I.S.P. (2013) - Sách chuyên khảo</span>
+                        <i class="fas text-xs transition-transform duration-200" :class="activeAccordion === 1 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
                     </button>
-                    <div class="p-4 bg-black bg-opacity-30 text-xs md:text-sm space-y-2 border-t border-white border-opacity-5" x-show="activeSource === 1">
-                        <p class="opacity-95"><strong>Loại nguồn:</strong> Sách</p>
-                        <p class="opacity-95"><strong>Độ uy tín tác giả:</strong> Rất uy tín (Học giả hàng đầu thế giới về học từ vựng)</p>
-                        <p class="opacity-95"><strong>Nhà xuất bản:</strong> Cambridge University Press</p>
-                        <p class="opacity-95"><strong>Phương pháp:</strong> Rõ ràng, mang tính lý thuyết hệ thống</p>
-                        <p class="opacity-95"><strong>Trích dẫn:</strong> Rất cao</p>
-                        <p class="opacity-95"><strong>Cập nhật:</strong> Tốt (2013)</p>
-                        <p class="opacity-95"><strong>Độ tin cậy:</strong> ⭐⭐⭐⭐⭐ 5/5</p>
+                    <div x-show="activeAccordion === 1" x-transition class="p-4 bg-black bg-opacity-30 border-t border-white border-opacity-10 text-xs md:text-sm space-y-1">
+                        <p class="opacity-90"><strong>Loại nguồn:</strong> Sách</p>
+                        <p class="opacity-90"><strong>Độ uy tín tác giả:</strong> Rất uy tín (Học giả hàng đầu thế giới về học từ vựng)</p>
+                        <p class="opacity-90"><strong>Nhà xuất bản:</strong> Cambridge University Press</p>
+                        <p class="opacity-90"><strong>Phương pháp:</strong> Rõ ràng, mang tính lý thuyết hệ thống</p>
+                        <p class="opacity-90"><strong>Trích dẫn:</strong> Rất cao</p>
+                        <p class="opacity-90"><strong>Cập nhật:</strong> Tốt (2013)</p>
+                        <p class="opacity-90"><strong>Độ tin cậy:</strong> ⭐⭐⭐⭐⭐ 5/5</p>
                     </div>
                 </div>
 
-                <!-- Học liệu 2 -->
-                <div class="glass-panel rounded-xl overflow-hidden">
-                    <button class="w-full p-4 text-left font-semibold flex justify-between items-center hover:bg-white hover:bg-opacity-5 transition-colors"
-                            @click="activeSource = (activeSource === 2 ? null : 2)">
-                        <span class="text-xs md:text-sm">2. Webb, S. (2015) — Bài báo nghiên cứu</span>
-                        <i class="fas" :class="activeSource === 2 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                <!-- 2. Webb (2015) -->
+                <div class="rounded-xl glass-card overflow-hidden">
+                    <button class="w-full p-4 text-left flex justify-between items-center focus:outline-none" @click="activeAccordion = (activeAccordion === 2 ? null : 2)">
+                        <span class="text-sm font-semibold">2. Webb, S. (2015) - Bài báo khoa học</span>
+                        <i class="fas text-xs transition-transform duration-200" :class="activeAccordion === 2 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
                     </button>
-                    <div class="p-4 bg-black bg-opacity-30 text-xs md:text-sm space-y-2 border-t border-white border-opacity-5" x-show="activeSource === 2">
-                        <p class="opacity-95"><strong>Loại nguồn:</strong> Bài báo</p>
-                        <p class="opacity-95"><strong>Độ uy tín tác giả:</strong> Uy tín</p>
-                        <p class="opacity-95"><strong>Nhà xuất bản:</strong> Language Learning Journal, 43(2)</p>
-                        <p class="opacity-95"><strong>Phương pháp:</strong> Thực nghiệm khoa học cụ thể</p>
-                        <p class="opacity-95"><strong>Trích dẫn:</strong> Cao</p>
-                        <p class="opacity-95"><strong>Cập nhật:</strong> Tốt (2015)</p>
-                        <p class="opacity-95"><strong>Độ tin cậy:</strong> ⭐⭐⭐⭐⭐ 5/5</p>
+                    <div x-show="activeAccordion === 2" x-transition class="p-4 bg-black bg-opacity-30 border-t border-white border-opacity-10 text-xs md:text-sm space-y-1">
+                        <p class="opacity-90"><strong>Loại nguồn:</strong> Bài báo</p>
+                        <p class="opacity-90"><strong>Độ uy tín tác giả:</strong> Uy tín</p>
+                        <p class="opacity-90"><strong>Nhà xuất bản:</strong> Language Learning Journal, 43(2)</p>
+                        <p class="opacity-90"><strong>Phương pháp:</strong> Thực nghiệm khoa học cụ thể</p>
+                        <p class="opacity-90"><strong>Trích dẫn:</strong> Cao</p>
+                        <p class="opacity-90"><strong>Cập nhật:</strong> Tốt (2015)</p>
+                        <p class="opacity-90"><strong>Độ tin cậy:</strong> ⭐⭐⭐⭐⭐ 5/5</p>
                     </div>
                 </div>
 
-                <!-- Học liệu 3 -->
-                <div class="glass-panel rounded-xl overflow-hidden">
-                    <button class="w-full p-4 text-left font-semibold flex justify-between items-center hover:bg-white hover:bg-opacity-5 transition-colors"
-                            @click="activeSource = (activeSource === 3 ? null : 3)">
-                        <span class="text-xs md:text-sm">3. Zhang, D. (2018) — Bài báo chuyên ngành</span>
-                        <i class="fas" :class="activeSource === 3 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                <!-- 3. Zhang (2018) -->
+                <div class="rounded-xl glass-card overflow-hidden">
+                    <button class="w-full p-4 text-left flex justify-between items-center focus:outline-none" @click="activeAccordion = (activeAccordion === 3 ? null : 3)">
+                        <span class="text-sm font-semibold">3. Zhang, D. (2018) - Bài báo khoa học</span>
+                        <i class="fas text-xs transition-transform duration-200" :class="activeAccordion === 3 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
                     </button>
-                    <div class="p-4 bg-black bg-opacity-30 text-xs md:text-sm space-y-2 border-t border-white border-opacity-5" x-show="activeSource === 3">
-                        <p class="opacity-95"><strong>Loại nguồn:</strong> Bài báo</p>
-                        <p class="opacity-95"><strong>Độ uy tín tác giả:</strong> Chuyên ngành sâu</p>
-                        <p class="opacity-95"><strong>Nhà xuất bản:</strong> Journal of Chinese Linguistics, 46(1)</p>
-                        <p class="opacity-95"><strong>Phương pháp:</strong> Phân tích nghiên cứu</p>
-                        <p class="opacity-95"><strong>Trích dẫn:</strong> Trung bình</p>
-                        <p class="opacity-95"><strong>Cập nhật:</strong> Tốt (2018)</p>
-                        <p class="opacity-95"><strong>Độ tin cậy:</strong> ⭐⭐⭐⭐ 4/5</p>
+                    <div x-show="activeAccordion === 3" x-transition class="p-4 bg-black bg-opacity-30 border-t border-white border-opacity-10 text-xs md:text-sm space-y-1">
+                        <p class="opacity-90"><strong>Loại nguồn:</strong> Bài báo</p>
+                        <p class="opacity-90"><strong>Độ uy tín tác giả:</strong> Chuyên ngành sâu</p>
+                        <p class="opacity-90"><strong>Nhà xuất bản:</strong> Journal of Chinese Linguistics, 46(1)</p>
+                        <p class="opacity-90"><strong>Phương pháp:</strong> Phân tích nghiên cứu</p>
+                        <p class="opacity-90"><strong>Trích dẫn:</strong> Trung bình</p>
+                        <p class="opacity-90"><strong>Cập nhật:</strong> Tốt (2018)</p>
+                        <p class="opacity-90"><strong>Độ tin cậy:</strong> ⭐⭐⭐⭐ 4/5</p>
                     </div>
                 </div>
 
-                <!-- Học liệu 4 -->
-                <div class="glass-panel rounded-xl overflow-hidden">
-                    <button class="w-full p-4 text-left font-semibold flex justify-between items-center hover:bg-white hover:bg-opacity-5 transition-colors"
-                            @click="activeSource = (activeSource === 4 ? null : 4)">
-                        <span class="text-xs md:text-sm">4. Chen, X. & Li, Y. (2020) — Bài báo công nghệ ứng dụng</span>
-                        <i class="fas" :class="activeSource === 4 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                <!-- 4. Chen & Li (2020) -->
+                <div class="rounded-xl glass-card overflow-hidden">
+                    <button class="w-full p-4 text-left flex justify-between items-center focus:outline-none" @click="activeAccordion = (activeAccordion === 4 ? null : 4)">
+                        <span class="text-sm font-semibold">4. Chen, X. & Li, Y. (2020) - Bài báo khoa học</span>
+                        <i class="fas text-xs transition-transform duration-200" :class="activeAccordion === 4 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
                     </button>
-                    <div class="p-4 bg-black bg-opacity-30 text-xs md:text-sm space-y-2 border-t border-white border-opacity-5" x-show="activeSource === 4">
-                        <p class="opacity-95"><strong>Loại nguồn:</strong> Bài báo</p>
-                        <p class="opacity-95"><strong>Độ uy tín tác giả:</strong> Uy tín</p>
-                        <p class="opacity-95"><strong>Nhà xuất bản:</strong> Computer Assisted Language Learning, 33(5)</p>
-                        <p class="opacity-95"><strong>Phương pháp:</strong> Thực nghiệm</p>
-                        <p class="opacity-95"><strong>Trích dẫn:</strong> Cao</p>
-                        <p class="opacity-95"><strong>Cập nhật:</strong> Mới (2020)</p>
-                        <p class="opacity-95"><strong>Độ tin cậy:</strong> ⭐⭐⭐⭐⭐ 5/5</p>
+                    <div x-show="activeAccordion === 4" x-transition class="p-4 bg-black bg-opacity-30 border-t border-white border-opacity-10 text-xs md:text-sm space-y-1">
+                        <p class="opacity-90"><strong>Loại nguồn:</strong> Bài báo</p>
+                        <p class="opacity-90"><strong>Độ uy tín tác giả:</strong> Uy tín</p>
+                        <p class="opacity-90"><strong>Nhà xuất bản:</strong> Computer Assisted Language Learning, 33(5)</p>
+                        <p class="opacity-90"><strong>Phương pháp:</strong> Thực nghiệm</p>
+                        <p class="opacity-90"><strong>Trích dẫn:</strong> Cao</p>
+                        <p class="opacity-90"><strong>Cập nhật:</strong> Mới (2020)</p>
+                        <p class="opacity-90"><strong>Độ tin cậy:</strong> ⭐⭐⭐⭐⭐ 5/5</p>
                     </div>
                 </div>
 
-                <!-- Học liệu 5 -->
-                <div class="glass-panel rounded-xl overflow-hidden">
-                    <button class="w-full p-4 text-left font-semibold flex justify-between items-center hover:bg-white hover:bg-opacity-5 transition-colors"
-                            @click="activeSource = (activeSource === 5 ? null : 5)">
-                        <span class="text-xs md:text-sm">5. Shen, H.H. (2010) — Bài báo nghiên cứu hình ảnh</span>
-                        <i class="fas" :class="activeSource === 5 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                <!-- 5. Shen (2010) -->
+                <div class="rounded-xl glass-card overflow-hidden">
+                    <button class="w-full p-4 text-left flex justify-between items-center focus:outline-none" @click="activeAccordion = (activeAccordion === 5 ? null : 5)">
+                        <span class="text-sm font-semibold">5. Shen, H.H. (2010) - Bài báo khoa học</span>
+                        <i class="fas text-xs transition-transform duration-200" :class="activeAccordion === 5 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
                     </button>
-                    <div class="p-4 bg-black bg-opacity-30 text-xs md:text-sm space-y-2 border-t border-white border-opacity-5" x-show="activeSource === 5">
-                        <p class="opacity-95"><strong>Loại nguồn:</strong> Bài báo</p>
-                        <p class="opacity-95"><strong>Độ uy tín tác giả:</strong> Uy tín</p>
-                        <p class="opacity-95"><strong>Nhà xuất bản:</strong> Language Teaching Research, 14(2)</p>
-                        <p class="opacity-95"><strong>Phương pháp:</strong> Thực nghiệm</p>
-                        <p class="opacity-95"><strong>Trích dẫn:</strong> Trung bình</p>
-                        <p class="opacity-95"><strong>Cập nhật:</strong> Hơi cũ (2010)</p>
-                        <p class="opacity-95"><strong>Độ tin cậy:</strong> ⭐⭐⭐⭐ 4/5</p>
+                    <div x-show="activeAccordion === 5" x-transition class="p-4 bg-black bg-opacity-30 border-t border-white border-opacity-10 text-xs md:text-sm space-y-1">
+                        <p class="opacity-90"><strong>Loại nguồn:</strong> Bài báo</p>
+                        <p class="opacity-90"><strong>Độ uy tín tác giả:</strong> Uy tín</p>
+                        <p class="opacity-90"><strong>Nhà xuất bản:</strong> Language Teaching Research, 14(2)</p>
+                        <p class="opacity-90"><strong>Phương pháp:</strong> Thực nghiệm</p>
+                        <p class="opacity-90"><strong>Trích dẫn:</strong> Trung bình</p>
+                        <p class="opacity-90"><strong>Cập nhật:</strong> Hơi cũ</p>
+                        <p class="opacity-90"><strong>Độ tin cậy:</strong> ⭐⭐⭐⭐ 4/5</p>
                     </div>
                 </div>
 
-                <!-- Học liệu 6 -->
-                <div class="glass-panel rounded-xl overflow-hidden">
-                    <button class="w-full p-4 text-left font-semibold flex justify-between items-center hover:bg-white hover:bg-opacity-5 transition-colors"
-                            @click="activeSource = (activeSource === 6 ? null : 6)">
-                        <span class="text-xs md:text-sm">6. Schmitt, N. (2010) — Sách tổng hợp lý luận</span>
-                        <i class="fas" :class="activeSource === 6 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                <!-- 6. Schmitt (2010) -->
+                <div class="rounded-xl glass-card overflow-hidden">
+                    <button class="w-full p-4 text-left flex justify-between items-center focus:outline-none" @click="activeAccordion = (activeAccordion === 6 ? null : 6)">
+                        <span class="text-sm font-semibold">6. Schmitt, N. (2010) - Sách chuyên khảo</span>
+                        <i class="fas text-xs transition-transform duration-200" :class="activeAccordion === 6 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
                     </button>
-                    <div class="p-4 bg-black bg-opacity-30 text-xs md:text-sm space-y-2 border-t border-white border-opacity-5" x-show="activeSource === 6">
-                        <p class="opacity-95"><strong>Loại nguồn:</strong> Sách</p>
-                        <p class="opacity-95"><strong>Độ uy tín tác giả:</strong> Rất uy tín</p>
-                        <p class="opacity-95"><strong>Nhà xuất bản:</strong> Palgrave Macmillan</p>
-                        <p class="opacity-95"><strong>Phương pháp:</strong> Tổng hợp lý luận hệ thống</p>
-                        <p class="opacity-95"><strong>Trích dẫn:</strong> Cao</p>
-                        <p class="opacity-95"><strong>Cập nhật:</strong> Hơi cũ (2010)</p>
-                        <p class="opacity-95"><strong>Độ tin cậy:</strong> ⭐⭐⭐⭐ 4/5</p>
+                    <div x-show="activeAccordion === 6" x-transition class="p-4 bg-black bg-opacity-30 border-t border-white border-opacity-10 text-xs md:text-sm space-y-1">
+                        <p class="opacity-90"><strong>Loại nguồn:</strong> Sách</p>
+                        <p class="opacity-90"><strong>Độ uy tín tác giả:</strong> Rất uy tín</p>
+                        <p class="opacity-90"><strong>Nhà xuất bản:</strong> Palgrave Macmillan</p>
+                        <p class="opacity-90"><strong>Phương pháp:</strong> Tổng hợp lý luận hệ thống</p>
+                        <p class="opacity-90"><strong>Trích dẫn:</strong> Cao</p>
+                        <p class="opacity-90"><strong>Cập nhật:</strong> Hơi cũ</p>
+                        <p class="opacity-90"><strong>Độ tin cậy:</strong> ⭐⭐⭐⭐ 4/5</p>
                     </div>
                 </div>
 
-                <!-- Học liệu 7 -->
-                <div class="glass-panel rounded-xl overflow-hidden">
-                    <button class="w-full p-4 text-left font-semibold flex justify-between items-center hover:bg-white hover:bg-opacity-5 transition-colors"
-                            @click="activeSource = (activeSource === 7 ? null : 7)">
-                        <span class="text-xs md:text-sm">7. Laufer, B. (2017) — Sách nghiên cứu chuyên đề</span>
-                        <i class="fas" :class="activeSource === 7 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                <!-- 7. Laufer (2017) -->
+                <div class="rounded-xl glass-card overflow-hidden">
+                    <button class="w-full p-4 text-left flex justify-between items-center focus:outline-none" @click="activeAccordion = (activeAccordion === 7 ? null : 7)">
+                        <span class="text-sm font-semibold">7. Laufer, B. (2017) - Sách chuyên khảo</span>
+                        <i class="fas text-xs transition-transform duration-200" :class="activeAccordion === 7 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
                     </button>
-                    <div class="p-4 bg-black bg-opacity-30 text-xs md:text-sm space-y-2 border-t border-white border-opacity-5" x-show="activeSource === 7">
-                        <p class="opacity-95"><strong>Loại nguồn:</strong> Sách</p>
-                        <p class="opacity-95"><strong>Độ uy tín tác giả:</strong> Uy tín</p>
-                        <p class="opacity-95"><strong>Nhà xuất bản:</strong> Routledge</p>
-                        <p class="opacity-95"><strong>Phương pháp:</strong> Nghiên cứu chuyên khảo</p>
-                        <p class="opacity-95"><strong>Trích dẫn:</strong> Cao</p>
-                        <p class="opacity-95"><strong>Cập nhật:</strong> Tốt (2017)</p>
-                        <p class="opacity-95"><strong>Độ tin cậy:</strong> ⭐⭐⭐⭐⭐ 5/5</p>
+                    <div x-show="activeAccordion === 7" x-transition class="p-4 bg-black bg-opacity-30 border-t border-white border-opacity-10 text-xs md:text-sm space-y-1">
+                        <p class="opacity-90"><strong>Loại nguồn:</strong> Sách</p>
+                        <p class="opacity-90"><strong>Độ uy tín tác giả:</strong> Uy tín</p>
+                        <p class="opacity-90"><strong>Nhà xuất bản:</strong> Routledge</p>
+                        <p class="opacity-90"><strong>Phương pháp:</strong> Nghiên cứu chuyên khảo</p>
+                        <p class="opacity-90"><strong>Trích dẫn:</strong> Cao</p>
+                        <p class="opacity-90"><strong>Cập nhật:</strong> Tốt (2017)</p>
+                        <p class="opacity-90"><strong>Độ tin cậy:</strong> ⭐⭐⭐⭐⭐ 5/5</p>
                     </div>
                 </div>
 
-                <!-- Học liệu 8 -->
-                <div class="glass-panel rounded-xl overflow-hidden">
-                    <button class="w-full p-4 text-left font-semibold flex justify-between items-center hover:bg-white hover:bg-opacity-5 transition-colors"
-                            @click="activeSource = (activeSource === 8 ? null : 8)">
-                        <span class="text-xs md:text-sm">8. Cambridge University Press (2022) — Nguồn mở</span>
-                        <i class="fas" :class="activeSource === 8 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                <!-- 8. Cambridge (2022) -->
+                <div class="rounded-xl glass-card overflow-hidden">
+                    <button class="w-full p-4 text-left flex justify-between items-center focus:outline-none" @click="activeAccordion = (activeAccordion === 8 ? null : 8)">
+                        <span class="text-sm font-semibold">8. Cambridge University Press (2022) - Nguồn mở Internet</span>
+                        <i class="fas text-xs transition-transform duration-200" :class="activeAccordion === 8 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
                     </button>
-                    <div class="p-4 bg-black bg-opacity-30 text-xs md:text-sm space-y-2 border-t border-white border-opacity-5" x-show="activeSource === 8">
-                        <p class="opacity-95"><strong>Loại nguồn:</strong> Web</p>
-                        <p class="opacity-95"><strong>Độ uy tín tác giả:</strong> Tổ chức giáo dục lớn uy tín</p>
-                        <p class="opacity-95"><strong>Nhà xuất bản:</strong> Cambridge</p>
-                        <p class="opacity-95"><strong>Phương pháp:</strong> Tổng hợp hướng dẫn</p>
-                        <p class="opacity-95"><strong>Trích dẫn:</strong> Trung bình</p>
-                        <p class="opacity-95"><strong>Cập nhật:</strong> Mới (2022)</p>
-                        <p class="opacity-95"><strong>Độ tin cậy:</strong> ⭐⭐⭐⭐ 4/5</p>
+                    <div x-show="activeAccordion === 8" x-transition class="p-4 bg-black bg-opacity-30 border-t border-white border-opacity-10 text-xs md:text-sm space-y-1">
+                        <p class="opacity-90"><strong>Loại nguồn:</strong> Web</p>
+                        <p class="opacity-90"><strong>Độ uy tín tác giả:</strong> Tổ chức giáo dục lớn uy tín</p>
+                        <p class="opacity-90"><strong>Nhà xuất bản:</strong> Cambridge</p>
+                        <p class="opacity-90"><strong>Phương pháp:</strong> Tổng hợp hướng dẫn</p>
+                        <p class="opacity-90"><strong>Trích dẫn:</strong> Trung bình</p>
+                        <p class="opacity-90"><strong>Cập nhật:</strong> Mới (2022)</p>
+                        <p class="opacity-90"><strong>Độ tin cậy:</strong> ⭐⭐⭐⭐ 4/5</p>
                     </div>
                 </div>
 
-                <!-- Học liệu 9 -->
-                <div class="glass-panel rounded-xl overflow-hidden">
-                    <button class="w-full p-4 text-left font-semibold flex justify-between items-center hover:bg-white hover:bg-opacity-5 transition-colors"
-                            @click="activeSource = (activeSource === 9 ? null : 9)">
-                        <span class="text-xs md:text-sm">9. British Council (2021) — Hướng dẫn ứng dụng</span>
-                        <i class="fas" :class="activeSource === 9 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                <!-- 9. British Council (2021) -->
+                <div class="rounded-xl glass-card overflow-hidden">
+                    <button class="w-full p-4 text-left flex justify-between items-center focus:outline-none" @click="activeAccordion = (activeAccordion === 9 ? null : 9)">
+                        <span class="text-sm font-semibold">9. British Council (2021) - Nguồn mở Internet</span>
+                        <i class="fas text-xs transition-transform duration-200" :class="activeAccordion === 9 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
                     </button>
-                    <div class="p-4 bg-black bg-opacity-30 text-xs md:text-sm space-y-2 border-t border-white border-opacity-5" x-show="activeSource === 9">
-                        <p class="opacity-95"><strong>Loại nguồn:</strong> Web</p>
-                        <p class="opacity-95"><strong>Độ uy tín tác giả:</strong> Tổ chức giáo dục lớn uy tín</p>
-                        <p class="opacity-95"><strong>Nhà xuất bản:</strong> British Council (BC)</p>
-                        <p class="opacity-95"><strong>Phương pháp:</strong> Hướng dẫn ứng dụng thực hành</p>
-                        <p class="opacity-95"><strong>Trích dẫn:</strong> Trung bình</p>
-                        <p class="opacity-95"><strong>Cập nhật:</strong> Mới (2021)</p>
-                        <p class="opacity-95"><strong>Độ tin cậy:</strong> ⭐⭐⭐⭐ 4/5</p>
+                    <div x-show="activeAccordion === 9" x-transition class="p-4 bg-black bg-opacity-30 border-t border-white border-opacity-10 text-xs md:text-sm space-y-1">
+                        <p class="opacity-90"><strong>Loại nguồn:</strong> Web</p>
+                        <p class="opacity-90"><strong>Độ uy tín tác giả:</strong> Tổ chức giáo dục lớn uy tín</p>
+                        <p class="opacity-90"><strong>Nhà xuất bản:</strong> British Council (BC)</p>
+                        <p class="opacity-90"><strong>Phương pháp:</strong> Hướng dẫn ứng dụng thực hành</p>
+                        <p class="opacity-90"><strong>Trích dẫn:</strong> Trung bình</p>
+                        <p class="opacity-90"><strong>Cập nhật:</strong> Mới (2021)</p>
+                        <p class="opacity-90"><strong>Độ tin cậy:</strong> ⭐⭐⭐⭐ 4/5</p>
                     </div>
                 </div>
 
-                <!-- Học liệu 10 -->
-                <div class="glass-panel rounded-xl overflow-hidden">
-                    <button class="w-full p-4 text-left font-semibold flex justify-between items-center hover:bg-white hover:bg-opacity-5 transition-colors"
-                            @click="activeSource = (activeSource === 10 ? null : 10)">
-                        <span class="text-xs md:text-sm">10. Nation & Webb (2011) — Sách phân tích</span>
-                        <i class="fas" :class="activeSource === 10 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                <!-- 10. Nation & Webb (2011) -->
+                <div class="rounded-xl glass-card overflow-hidden">
+                    <button class="w-full p-4 text-left flex justify-between items-center focus:outline-none" @click="activeAccordion = (activeAccordion === 10 ? null : 10)">
+                        <span class="text-sm font-semibold">10. Nation & Webb (2011) - Sách chuyên khảo</span>
+                        <i class="fas text-xs transition-transform duration-200" :class="activeAccordion === 10 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
                     </button>
-                    <div class="p-4 bg-black bg-opacity-30 text-xs md:text-sm space-y-2 border-t border-white border-opacity-5" x-show="activeSource === 10">
-                        <p class="opacity-95"><strong>Loại nguồn:</strong> Sách</p>
-                        <p class="opacity-95"><strong>Độ uy tín tác giả:</strong> Uy tín sâu</p>
-                        <p class="opacity-95"><strong>Nhà xuất bản:</strong> Heinle Cengage</p>
-                        <p class="opacity-95"><strong>Phương pháp:</strong> Nghiên cứu thực nghiệm</p>
-                        <p class="opacity-95"><strong>Trích dẫn:</strong> Cao</p>
-                        <p class="opacity-95"><strong>Cập nhật:</strong> Hơi cũ (2011)</p>
-                        <p class="opacity-95"><strong>Độ tin cậy:</strong> ⭐⭐⭐⭐ 4/5</p>
+                    <div x-show="activeAccordion === 10" x-transition class="p-4 bg-black bg-opacity-30 border-t border-white border-opacity-10 text-xs md:text-sm space-y-1">
+                        <p class="opacity-90"><strong>Loại nguồn:</strong> Sách</p>
+                        <p class="opacity-90"><strong>Độ uy tín tác giả:</strong> Uy tín sâu</p>
+                        <p class="opacity-90"><strong>Nhà xuất bản:</strong> Heinle Cengage</p>
+                        <p class="opacity-90"><strong>Phương pháp:</strong> Nghiên cứu thực nghiệm</p>
+                        <p class="opacity-90"><strong>Trích dẫn:</strong> Cao</p>
+                        <p class="opacity-90"><strong>Cập nhật:</strong> Hơi cũ</p>
+                        <p class="opacity-90"><strong>Độ tin cậy:</strong> ⭐⭐⭐⭐ 4/5</p>
                     </div>
                 </div>
 
-                <!-- Học liệu 11 -->
-                <div class="glass-panel rounded-xl overflow-hidden">
-                    <button class="w-full p-4 text-left font-semibold flex justify-between items-center hover:bg-white hover:bg-opacity-5 transition-colors"
-                            @click="activeSource = (activeSource === 11 ? null : 11)">
-                        <span class="text-xs md:text-sm">11. Gu (2012) — Chiến lược nghiên cứu từ vựng</span>
-                        <i class="fas" :class="activeSource === 11 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                <!-- 11. Gu (2012) -->
+                <div class="rounded-xl glass-card overflow-hidden">
+                    <button class="w-full p-4 text-left flex justify-between items-center focus:outline-none" @click="activeAccordion = (activeAccordion === 11 ? null : 11)">
+                        <span class="text-sm font-semibold">11. Gu, Y. (2012) - Bài báo khoa học</span>
+                        <i class="fas text-xs transition-transform duration-200" :class="activeAccordion === 11 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
                     </button>
-                    <div class="p-4 bg-black bg-opacity-30 text-xs md:text-sm space-y-2 border-t border-white border-opacity-5" x-show="activeSource === 11">
-                        <p class="opacity-95"><strong>Loại nguồn:</strong> Bài báo</p>
-                        <p class="opacity-95"><strong>Độ uy tín tác giả:</strong> Uy tín</p>
-                        <p class="opacity-95"><strong>Nhà xuất bản:</strong> TESOL Quarterly, 46(4)</p>
-                        <p class="opacity-95"><strong>Phương pháp:</strong> Nghiên cứu</p>
-                        <p class="opacity-95"><strong>Trích dẫn:</strong> Cao</p>
-                        <p class="opacity-95"><strong>Cập nhật:</strong> Tốt (2012)</p>
-                        <p class="opacity-95"><strong>Độ tin cậy:</strong> ⭐⭐⭐⭐ 4/5</p>
+                    <div x-show="activeAccordion === 11" x-transition class="p-4 bg-black bg-opacity-30 border-t border-white border-opacity-10 text-xs md:text-sm space-y-1">
+                        <p class="opacity-90"><strong>Loại nguồn:</strong> Bài báo</p>
+                        <p class="opacity-90"><strong>Độ uy tín tác giả:</strong> Uy tín</p>
+                        <p class="opacity-90"><strong>Nhà xuất bản:</strong> TESOL Quarterly, 46(4)</p>
+                        <p class="opacity-90"><strong>Phương pháp:</strong> Nghiên cứu</p>
+                        <p class="opacity-90"><strong>Trích dẫn:</strong> Cao</p>
+                        <p class="opacity-90"><strong>Cập nhật:</strong> Tốt (2012)</p>
+                        <p class="opacity-90"><strong>Độ tin cậy:</strong> ⭐⭐⭐⭐ 4/5</p>
                     </div>
                 </div>
             </div>
 
             <div class="space-y-4 font-light text-sm md:text-base leading-relaxed opacity-95">
                 <h4 class="font-semibold mt-4">🌿 Bài học kinh nghiệm sâu sắc:</h4>
-                <p>
+                <p class="text-gray-300">
                     Việc nghiên cứu phương pháp giảng dạy từ vựng bắt buộc phải lấy các tài liệu nghiên cứu thực nghiệm học thuật có bình duyệt làm xương sống. Nguồn mở trên Internet chỉ đóng vai trò gia tăng cảm hứng trực quan, cần liên tục được đối chiếu cẩn thận để tránh nhầm lẫn kiến thức chuyên ngành.
                 </p>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 3 (KỸ THUẬT PROMPT - Thiết kế kiểu Accordion giúp hoạt động mượt mà không lo lỗi chiều cao hay nested scroll) -->
-    <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-85"
-         x-show="openModal === 3" x-transition:enter="transition duration-300" x-transition:leave="transition duration-200" style="display: none;">
-        <div class="glass-panel-dark max-w-3xl w-full max-h-[85vh] overflow-y-auto rounded-3xl p-6 md:p-8 relative"
-             @click.away="openModal = null" x-data="{ activeTask: 1, activeVer: 1 }">
-            <button @click="openModal = null" class="absolute top-4 right-4 hover:opacity-85">
-                <i class="fas fa-times text-xl"></i>
+    <!-- MODAL 3 -->
+    <div class="fixed inset-0 z-50 overflow-y-auto bg-black bg-opacity-80 backdrop-filter backdrop-blur-md p-4 flex justify-center items-start sm:items-center"
+         x-show="openModal === 3" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         @click.self="openModal = null"
+         style="display: none;">
+         
+        <div class="glass-panel-dark w-full max-w-3xl rounded-3xl p-6 md:p-10 my-8 relative transform transition-all shadow-2xl"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-95"
+             x-data="{ currentTask: 1, currentVer: 1 }">
+             
+            <button @click="openModal = null" class="absolute top-5 right-5 hover:opacity-75 focus:outline-none z-10 transition-opacity">
+                <i class="fas fa-times text-2xl"></i>
             </button>
             <span class="text-xs font-semibold uppercase tracking-wider block mb-2 opacity-80">Prompt Engineering</span>
             <h3 class="text-2xl font-bold mb-4">Bài 3: Trực nghiệm và phát triển kỹ năng viết Prompt khoa học</h3>
@@ -902,100 +939,142 @@
                 </p>
             </div>
 
-            <!-- Tác vụ 1 -->
-            <div class="glass-panel rounded-xl overflow-hidden mb-3">
-                <button class="w-full p-4 text-left font-semibold flex justify-between items-center hover:bg-white hover:bg-opacity-5 transition-colors"
-                        @click="activeTask = (activeTask === 1 ? null : 1)">
-                    <span class="text-xs md:text-sm">Tác vụ 1: Tóm tắt bài đọc HSK4 “理想工作”</span>
-                    <i class="fas" :class="activeTask === 1 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-                </button>
-                <div class="p-4 bg-black bg-opacity-30 text-xs md:text-sm space-y-4 border-t border-white border-opacity-5" x-show="activeTask === 1">
+            <!-- Panel tương tác giả lập Prompt xịn xò (Hủy bỏ min-height cứng, cho phép tự co giãn theo nội dung) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
+                <div class="lg:col-span-4 flex flex-col gap-4">
                     <div>
-                        <strong class="text-white block mb-1">Prompt Cơ bản (V1):</strong>
-                        <code class="block bg-white bg-opacity-10 p-2 rounded font-mono">"Hãy tóm tắt bài đọc HSK4 dưới đây bằng tiếng Việt: [Nội dung văn bản]"</code>
-                        <p class="opacity-90 mt-1"><strong>Đầu ra:</strong> Ngắn, liên tục, giọng điệu máy móc.</p>
+                        <span class="text-xs opacity-60 block mb-1">Lựa chọn tác vụ:</span>
+                        <div class="flex flex-col gap-2">
+                            <button class="text-left p-2 rounded text-xs transition-all focus:outline-none" :class="currentTask === 1 ? 'bg-white bg-opacity-20 border' : 'glass-panel'" @click="currentTask = 1; currentVer = 1">Tác vụ 1: Tóm tắt bài đọc</button>
+                            <button class="text-left p-2 rounded text-xs transition-all focus:outline-none" :class="currentTask === 2 ? 'bg-white bg-opacity-20 border' : 'glass-panel'" @click="currentTask = 2; currentVer = 1">Tác vụ 2: Giải thích "把字句"</button>
+                            <button class="text-left p-2 rounded text-xs transition-all focus:outline-none" :class="currentTask === 3 ? 'bg-white bg-opacity-20 border' : 'glass-panel'" @click="currentTask = 3; currentVer = 1">Tác vụ 3: Đề thi thành ngữ HSK5</button>
+                        </div>
                     </div>
+
                     <div>
-                        <strong class="text-white block mb-1">Prompt Cải tiến (V2):</strong>
-                        <code class="block bg-white bg-opacity-10 p-2 rounded font-mono">"Hãy đọc bài đọc HSK4 dưới đây và thực hiện các yêu cầu: 1. Tóm tắt bằng tiếng Việt trong 100-120 từ. 2. Nêu ý chính. 3. Liệt kê 5 từ vựng HSK4. 4. Giải thích ngắn gọn..."</code>
-                        <p class="opacity-90 mt-1"><strong>Đầu ra:</strong> Khá rõ ràng, có phân đoạn, nội dung diễn giải từ vựng còn khuôn mẫu.</p>
-                    </div>
-                    <div>
-                        <strong class="text-white block mb-1">Prompt Nâng cao (V3):</strong>
-                        <code class="block bg-white bg-opacity-10 p-2 rounded font-mono">"Bạn là giảng viên tiếng Trung đang hướng dẫn sinh viên ôn thi HSK4. Nhiệm vụ: Bước 1: Xác định chủ đề. Bước 2: Tìm 3 ý quan trọng nhất. Bước 3: Tóm tắt bằng tiếng Việt trong 80-100 từ. Bước 4: Trích xuất 5 từ vựng HSK4 quan trọng..."</code>
-                        <p class="opacity-90 mt-1"><strong>Đầu ra:</strong> Xuất sắc. Markdown chặt chẽ, đào sâu bản chất, giọng điệu linh hoạt tự nhiên.</p>
+                        <span class="text-xs opacity-60 block mb-1">Chọn phiên bản câu lệnh:</span>
+                        <div class="flex gap-2">
+                            <button class="flex-1 p-2 rounded text-xs transition-all text-center focus:outline-none" :class="currentVer === 1 ? 'bg-white bg-opacity-20 border' : 'glass-panel'" @click="currentVer = 1">Cơ bản (V1)</button>
+                            <button class="flex-1 p-2 rounded text-xs transition-all text-center focus:outline-none" :class="currentVer === 2 ? 'bg-white bg-opacity-20 border' : 'glass-panel'" @click="currentVer = 2">Cải tiến (V2)</button>
+                            <button class="flex-1 p-2 rounded text-xs transition-all text-center focus:outline-none" :class="currentVer === 3 ? 'bg-white bg-opacity-20 border' : 'glass-panel'" @click="currentVer = 3">Nâng cao (V3)</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Tác vụ 2 -->
-            <div class="glass-panel rounded-xl overflow-hidden mb-3">
-                <button class="w-full p-4 text-left font-semibold flex justify-between items-center hover:bg-white hover:bg-opacity-5 transition-colors"
-                        @click="activeTask = (activeTask === 2 ? null : 2)">
-                    <span class="text-xs md:text-sm">Tác vụ 2: Giải thích ngữ pháp “把字句”</span>
-                    <i class="fas" :class="activeTask === 2 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-                </button>
-                <div class="p-4 bg-black bg-opacity-30 text-xs md:text-sm space-y-4 border-t border-white border-opacity-5" x-show="activeTask === 2">
-                    <div>
-                        <strong class="text-white block mb-1">Prompt Cơ bản (V1):</strong>
-                        <code class="block bg-white bg-opacity-10 p-2 rounded font-mono">"Hãy giải thích cách dùng của 把字句 trong tiếng Trung."</code>
-                        <p class="opacity-90 mt-1"><strong>Đầu ra:</strong> Lý thuyết dập khuôn, thiếu so sánh thực tiễn.</p>
-                    </div>
-                    <div>
-                        <strong class="text-white block mb-1">Prompt Cải tiến (V2):</strong>
-                        <code class="block bg-white bg-opacity-10 p-2 rounded font-mono">"Hãy giải thích 把字句 cho sinh viên năm nhất ngành Ngôn ngữ Trung. Yêu cầu: Định nghĩa, Cấu trúc, Điều kiện sử dụng, 5 ví dụ, So sánh và chỉ ra lỗi thường gặp."</code>
-                        <p class="opacity-90 mt-1"><strong>Đầu ra:</strong> Đầy đủ ý chính, phân chia theo yêu cầu, độ dài vừa phải.</p>
-                    </div>
-                    <div>
-                        <strong class="text-white block mb-1">Prompt Nâng cao (V3):</strong>
-                        <code class="block bg-white bg-opacity-10 p-2 rounded font-mono">"Bạn là giảng viên ngữ pháp tiếng Trung tại trường đại học. Hãy dạy chủ đề 把字句 theo phương pháp từ dễ đến khó. Thực hiện theo các bước: 1. Giải thích bằng ngôn ngữ đơn giản. 2. So sánh với tiếng Việt. 3. Phân tích cấu trúc ngữ pháp..."</code>
-                        <p class="opacity-90 mt-1"><strong>Đầu ra:</strong> Rất chi tiết, phân tích rào cản ngữ pháp của sinh viên Việt, chuỗi bài tập tự đánh giá kèm đáp án rõ ràng.</p>
-                    </div>
-                </div>
-            </div>
+                <div class="lg:col-span-8 bg-black bg-opacity-40 p-4 rounded-xl flex flex-col justify-between">
+                    <div class="text-xs md:text-sm space-y-3">
+                        <!-- Tác vụ 1 -->
+                        <template x-if="currentTask === 1 && currentVer === 1">
+                            <div>
+                                <strong class="text-white block mb-1">Prompt Cơ bản (V1):</strong>
+                                <code class="block bg-white bg-opacity-10 p-2 rounded font-mono">"Hãy tóm tắt bài đọc HSK4 dưới đây bằng tiếng Việt: [Nội dung văn bản 理想工作...]"</code>
+                                <strong class="text-white block mt-3 mb-1">Đánh giá đầu ra:</strong>
+                                <p class="opacity-90">Ngắn, text liên tục không ngắt đoạn, giọng điệu máy móc như sao chép từ từ điển, thiếu cấu trúc trực quan.</p>
+                            </div>
+                        </template>
+                        <template x-if="currentTask === 1 && currentVer === 2">
+                            <div>
+                                <strong class="text-white block mb-1">Prompt Cải tiến (V2):</strong>
+                                <code class="block bg-white bg-opacity-10 p-2 rounded font-mono">"Hãy đọc bài đọc HSK4 dưới đây và thực hiện các yêu cầu: 1. Tóm tắt nội dung bằng tiếng Việt trong khoảng 100-120 từ. 2. Nêu ý chính của bài. 3. Liệt kê 5 từ vựng HSK4 quan trọng xuất hiện trong bài. 4. Giải thích ngắn gọn ý nghĩa của các từ đó. 5. Viết phần tóm tắt theo văn phong dễ hiểu dành cho sinh viên năm nhất. [Nội dung văn bản...]"</code>
+                                <strong class="text-white block mt-3 mb-1">Đánh giá đầu ra:</strong>
+                                <p class="opacity-90">Khá rõ ràng, có phân chia theo yêu cầu, tuy nhiên diễn giải từ vựng còn khuôn mẫu, chưa sâu.</p>
+                            </div>
+                        </template>
+                        <template x-if="currentTask === 1 && currentVer === 3">
+                            <div>
+                                <strong class="text-white block mb-1">Prompt Nâng cao (V3 - Role Prompting + Constrained Formatting):</strong>
+                                <code class="block bg-white bg-opacity-10 p-2 rounded font-mono">"Bạn là giảng viên tiếng Trung đang hướng dẫn sinh viên ôn thi HSK4. Nhiệm vụ: Bước 1: Xác định chủ đề chính của bài đọc. Bước 2: Tìm 3 ý quan trọng nhất. Bước 3: Tóm tắt toàn bộ bài bằng tiếng Việt trong 80-100 từ. Bước 4: Trích xuất 5 từ vựng HSK4 quan trọng nhất. Bước 5: Giải thích vì sao các từ đó quan trọng đối với việc hiểu bài. [Nội dung văn bản...] kèm Ví dụ mẫu..."</code>
+                                <strong class="text-white block mt-3 mb-1">Đánh giá đầu ra:</strong>
+                                <p class="opacity-90">Xuất sắc. Cấu trúc chặt chẽ bằng Markdown, đào sâu trúng bản chất cốt lõi, giọng điệu tự nhiên biến hóa linh hoạt giữa học thuật và dí dỏm.</p>
+                            </div>
+                        </template>
 
-            <!-- Tác vụ 3 -->
-            <div class="glass-panel rounded-xl overflow-hidden mb-3">
-                <button class="w-full p-4 text-left font-semibold flex justify-between items-center hover:bg-white hover:bg-opacity-5 transition-colors"
-                        @click="activeTask = (activeTask === 3 ? null : 3)">
-                    <span class="text-xs md:text-sm">Tác vụ 3: Tạo bộ câu hỏi ôn tập Thành ngữ 4 chữ HSK5</span>
-                    <i class="fas" :class="activeTask === 3 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-                </button>
-                <div class="p-4 bg-black bg-opacity-30 text-xs md:text-sm space-y-4 border-t border-white border-opacity-5" x-show="activeTask === 3">
-                    <div>
-                        <strong class="text-white block mb-1">Prompt Cơ bản (V1):</strong>
-                        <code class="block bg-white bg-opacity-10 p-2 rounded font-mono">"Hãy tạo bộ câu hỏi ôn tập về thành ngữ 4 chữ tiếng Trung."</code>
-                        <p class="opacity-90 mt-1"><strong>Đầu ra:</strong> Quá đơn giản, hời hợt, thiếu đáp án đối chiếu.</p>
-                    </div>
-                    <div>
-                        <strong class="text-white block mb-1">Prompt Cải tiến (V2):</strong>
-                        <code class="block bg-white bg-opacity-10 p-2 rounded font-mono">"Hãy tạo bộ câu hỏi ôn tập về thành ngữ 4 chữ tiếng Trung dành cho người học trình độ HSK5. Yêu cầu: 10 câu trắc nghiệm, 5 câu điền từ, 5 câu ghép nghĩa, có đáp án cuối bài."</code>
-                        <p class="opacity-90 mt-1"><strong>Đầu ra:</strong> Số lượng đầy đủ nhưng độ phân hóa kiến thức chưa cao.</p>
-                    </div>
-                    <div>
-                        <strong class="text-white block mb-1">Prompt Nâng cao (V3):</strong>
-                        <code class="block bg-white bg-opacity-10 p-2 rounded font-mono">"Bạn là chuyên gia luyện thi HSK5. Hãy xây dựng một bộ đề ôn tập thành ngữ 4 chữ theo cấu trúc sau: Phần A: Nhận biết. Phần B: Vận dụng. Phần C: Phân biệt các cặp dễ nhầm. Phần D: Tình huống thực tế. Phần E: Tổng kết..."</code>
-                        <p class="opacity-90 mt-1"><strong>Đầu ra:</strong> Phân hóa rõ rệt theo thang đo Bloom, kích thích học sâu và tự đánh giá năng lực một cách hiệu quả.</p>
+                        <!-- Tác vụ 2 -->
+                        <template x-if="currentTask === 2 && currentVer === 1">
+                            <div>
+                                <strong class="text-white block mb-1">Prompt Cơ bản (V1):</strong>
+                                <code class="block bg-white bg-opacity-10 p-2 rounded font-mono">"Hãy giải thích cách dùng của 把字句 trong tiếng Trung."</code>
+                                <strong class="text-white block mt-3 mb-1">Đánh giá đầu ra:</strong>
+                                <p class="opacity-90">Mô tả lý thuyết chung chung, dập khuôn, thiếu ví dụ so sánh thực tiễn.</p>
+                            </div>
+                        </template>
+                        <template x-if="currentTask === 2 && currentVer === 2">
+                            <div>
+                                <strong class="text-white block mb-1">Prompt Cải tiến (V2):</strong>
+                                <code class="block bg-white bg-opacity-10 p-2 rounded font-mono">"Hãy giải thích 把字句 cho sinh viên năm nhất ngành Ngôn ngữ Trung. Yêu cầu: - Định nghĩa khái niệm. - Giải thích cấu trúc ngữ pháp. - Nêu điều kiện sử dụng. - Cho ít nhất 5 ví dụ. - So sánh với câu bình thường không có 把. - Chỉ ra các lỗi thường gặp."</code>
+                                <strong class="text-white block mt-3 mb-1">Đánh giá đầu ra:</strong>
+                                <p class="opacity-90">Đầy đủ ý chính, có phân đoạn theo yêu cầu, tối ưu hóa độ dài vừa phải cho sinh viên dễ đọc nhanh.</p>
+                            </div>
+                        </template>
+                        <template x-if="currentTask === 2 && currentVer === 3">
+                            <div>
+                                <strong class="text-white block mb-1">Prompt Nâng cao (V3 - Role Prompting + Analogy + CoT):</strong>
+                                <code class="block bg-white bg-opacity-10 p-2 rounded font-mono">"Bạn là giảng viên ngữ pháp tiếng Trung tại trường đại học. Hãy dạy chủ đề 把字句 theo phương pháp từ dễ đến khó. Thực hiện theo các bước: 1. Giải thích bằng ngôn ngữ đơn giản. 2. Đưa ra một phép so sánh với tiếng Việt. 3. Phân tích cấu trúc ngữ pháp S + 把 + O + V + Thành phần bổ sung. 4. Cho 5 ví dụ cơ bản. 5. Cho 5 ví dụ nâng cao. 6. Chỉ ra 5 lỗi sinh viên Việt Nam thường mắc. 7. Thiết kế 3 bài tập luyện tập. 8. Cung cấp đáp án và giải thích chi tiết."</code>
+                                <strong class="text-white block mt-3 mb-1">Đánh giá đầu ra:</strong>
+                                <p class="opacity-90">Cực kỳ chi tiết. Đi sâu phân tích rào cản ngữ pháp của sinh viên Việt, đưa ra phép ẩn dụ so sánh dễ nhớ và chuỗi bài tập tự đánh giá kèm đáp án rõ ràng.</p>
+                            </div>
+                        </template>
+
+                        <!-- Tác vụ 3 -->
+                        <template x-if="currentTask === 3 && currentVer === 1">
+                            <div>
+                                <strong class="text-white block mb-1">Prompt Cơ bản (V1):</strong>
+                                <code class="block bg-white bg-opacity-10 p-2 rounded font-mono">"Hãy tạo bộ câu hỏi ôn tập về thành ngữ 4 chữ tiếng Trung."</code>
+                                <strong class="text-white block mt-3 mb-1">Đánh giá đầu ra:</strong>
+                                <p class="opacity-90">Đưa ra câu hỏi quá đơn giản, hời hợt, chỉ kiểm tra trí nhớ ngắn hạn bề nổi, thiếu đáp án đối chiếu.</p>
+                            </div>
+                        </template>
+                        <template x-if="currentTask === 3 && currentVer === 2">
+                            <div>
+                                <strong class="text-white block mb-1">Prompt Cải tiến (V2):</strong>
+                                <code class="block bg-white bg-opacity-10 p-2 rounded font-mono">"Hãy tạo bộ câu hỏi ôn tập về thành ngữ 4 chữ tiếng Trung dành cho người học trình độ HSK5. Yêu cầu: - 10 câu trắc nghiệm. - 5 câu điền từ. - 5 câu ghép nghĩa. - Có đáp án cuối bài. - Thành ngữ sử dụng phổ biến trong HSK."</code>
+                                <strong class="text-white block mt-3 mb-1">Đánh giá đầu ra:</strong>
+                                <p class="opacity-90">Đáp ứng đủ số lượng yêu cầu nhưng các câu từ còn rập khuôn và mức độ phân hóa kiến thức chưa thực sự rõ rệt.</p>
+                            </div>
+                        </template>
+                        <template x-if="currentTask === 3 && currentVer === 3">
+                            <div>
+                                <strong class="text-white block mb-1">Prompt Nâng cao (V3 - Few-shot + Bloom's Taxonomy + Rubric Output):</strong>
+                                <code class="block bg-white bg-opacity-10 p-2 rounded font-mono">"Bạn là chuyên gia luyện thi HSK5. Hãy xây dựng một bộ đề ôn tập thành ngữ 4 chữ theo cấu trúc sau: Phần A: Nhận biết - 10 câu trắc nghiệm. Phần B: Vận dụng - 5 câu điền thành ngữ. Phần C: Phân biệt - 5 câu yêu cầu phân biệt các cặp thành ngữ dễ nhầm (như 坚持 không ngừng vs 半途 mà phế). Phần D: Tình huống thực tế - 5 câu sử dụng thành ngữ trong ngữ cảnh. Phần E: Tổng kết - Bảng giải thích ý nghĩa, Pinyin, Ví dụ, Tần suất xuất hiện."</code>
+                                <strong class="text-white block mt-3 mb-1">Đánh giá đầu ra:</strong>
+                                <p class="opacity-90">Xuất sắc. Hệ thống câu hỏi phân hóa đỉnh cao theo thang đo Bloom, giúp người học phát triển kỹ năng tư duy chiều sâu và tự đánh giá chuẩn xác năng lực học tập.</p>
+                            </div>
+                        </template>
                     </div>
                 </div>
             </div>
 
             <div class="space-y-4 font-light text-sm md:text-base leading-relaxed opacity-95">
                 <h4 class="font-semibold mt-4">🌿 Bài học kinh nghiệm sâu sắc:</h4>
-                <p>
+                <p class="text-gray-300">
                     Kỹ năng viết Prompt chính là chìa khóa mở cánh cửa tri thức kỷ nguyên số. Muốn thu được kết quả thông thái, người học bắt buộc phải đặt câu lệnh một cách thông minh, có cấu trúc vai trò, ràng buộc chi tiết và hướng dẫn chuỗi tư duy.
                 </p>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 4 (DỰ ÁN NHÓM) -->
-    <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-85"
-         x-show="openModal === 4" x-transition:enter="transition duration-300" x-transition:leave="transition duration-200" style="display: none;">
-        <div class="glass-panel-dark max-w-3xl w-full max-h-[85vh] overflow-y-auto rounded-3xl p-6 md:p-8 relative"
-             @click.away="openModal = null">
-            <button @click="openModal = null" class="absolute top-4 right-4 hover:opacity-85">
-                <i class="fas fa-times text-xl"></i>
+    <!-- MODAL 4 -->
+    <div class="fixed inset-0 z-50 overflow-y-auto bg-black bg-opacity-80 backdrop-filter backdrop-blur-md p-4 flex justify-center items-start sm:items-center"
+         x-show="openModal === 4" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         @click.self="openModal = null"
+         style="display: none;">
+         
+        <div class="glass-panel-dark w-full max-w-3xl rounded-3xl p-6 md:p-10 my-8 relative transform transition-all shadow-2xl"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-95">
+             
+            <button @click="openModal = null" class="absolute top-5 right-5 hover:opacity-75 focus:outline-none z-10 transition-opacity">
+                <i class="fas fa-times text-2xl"></i>
             </button>
             <span class="text-xs font-semibold uppercase tracking-wider block mb-2 opacity-80">Làm Việc Nhóm</span>
             <h3 class="text-2xl font-bold mb-4">Bài 4: Bản hòa ca đồng đội trực tuyến</h3>
@@ -1010,17 +1089,17 @@
             <div class="space-y-4 font-light text-sm md:text-base leading-relaxed opacity-95">
                 <h4 class="font-semibold">📅 Nhật ký 7 ngày nỗ lực tập thể:</h4>
                 <div class="border-l border-white border-opacity-20 pl-4 space-y-3">
-                    <p><strong>Ngày 1:</strong> Nhận nhiệm vụ từ giảng viên. Trưởng nhóm thiết lập không gian làm việc số và kích hoạt tài khoản ULIS.</p>
-                    <p><strong>Ngày 2:</strong> Cả nhóm thu thập học liệu tham khảo. Tiến hành cập nhật trực tuyến tiến độ ban đầu lên MS Teams.</p>
-                    <p><strong>Ngày 3:</strong> Hoàn thiện phần nội dung phân công. Tải toàn bộ tài liệu nghiên cứu lên Google Drive chung.</p>
-                    <p><strong>Ngày 4:</strong> Họp nhóm trực tuyến trên MS Teams để tiếp thu và chỉnh sửa theo đóng góp từ các thành viên.</p>
-                    <p><strong>Ngày 5:</strong> Hoàn thiện tổng quát nội dung dự thảo và tinh chỉnh tài liệu.</p>
-                    <p><strong>Ngày 6:</strong> Tiến hành kiểm tra, soát lỗi chính tả và định dạng lại tài liệu theo tiêu chuẩn APA.</p>
-                    <p><strong>Ngày 7:</strong> Đóng gói sản phẩm cuối cùng và chính thức nộp báo cáo nhóm đúng hạn.</p>
+                    <p class="text-gray-300"><strong>Ngày 1:</strong> Nhận nhiệm vụ từ giảng viên. Trưởng nhóm thiết lập không gian làm việc số và kích hoạt tài khoản ULIS.</p>
+                    <p class="text-gray-300"><strong>Ngày 2:</strong> Cả nhóm thu thập học liệu tham khảo. Tiến hành cập nhật trực tuyến tiến độ ban đầu lên MS Teams.</p>
+                    <p class="text-gray-300"><strong>Ngày 3:</strong> Hoàn thiện phần nội dung phân công. Tải toàn bộ tài liệu nghiên cứu lên Google Drive chung.</p>
+                    <p class="text-gray-300"><strong>Ngày 4:</strong> Họp nhóm trực tuyến trên MS Teams để tiếp thu và chỉnh sửa theo đóng góp từ các thành viên.</p>
+                    <p class="text-gray-300"><strong>Ngày 5:</strong> Hoàn thiện tổng quát nội dung dự thảo và tinh chỉnh tài liệu.</p>
+                    <p class="text-gray-300"><strong>Ngày 6:</strong> Tiến hành kiểm tra, soát lỗi chính tả và định dạng lại tài liệu theo tiêu chuẩn APA.</p>
+                    <p class="text-gray-300"><strong>Ngày 7:</strong> Đóng gói sản phẩm cuối cùng và chính thức nộp báo cáo nhóm đúng hạn.</p>
                 </div>
 
                 <h4 class="font-semibold mt-4">🛠️ Đánh giá hiệu quả công cụ:</h4>
-                <ul class="list-disc list-inside space-y-2 pl-2">
+                <ul class="list-disc list-inside space-y-2 pl-2 text-gray-300">
                     <li><strong>Microsoft Teams:</strong> Quản lý tiến độ công việc khoa học, họp nhóm trực tuyến ổn định.</li>
                     <li><strong>Google Docs:</strong> Cho phép 10 thành viên cùng biên soạn trực tiếp, tự động sao lưu an toàn.</li>
                     <li><strong>Google Drive:</strong> Lưu trữ dữ liệu dự án an toàn, chia sẻ thuận tiện không lo mất mát.</li>
@@ -1028,20 +1107,35 @@
                 </ul>
 
                 <h4 class="font-semibold mt-4">🌿 Bài học kinh nghiệm sâu sắc:</h4>
-                <p>
+                <p class="text-gray-300">
                     Vai trò của một trưởng nhóm không chỉ nằm ở việc phân công công việc mà là xây dựng một hệ sinh thái cộng tác trực tuyến thông minh, minh bạch, giúp kết nối các thành viên một cách nhịp nhàng và giảm thiểu mâu thuẫn khi làm việc từ xa.
                 </p>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 5 (ỨNG DỤNG AI) -->
-    <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-85"
-         x-show="openModal === 5" x-transition:enter="transition duration-300" x-transition:leave="transition duration-200" style="display: none;">
-        <div class="glass-panel-dark max-w-4xl w-full max-h-[85vh] overflow-y-auto rounded-3xl p-6 md:p-8 relative"
-             @click.away="openModal = null">
-            <button @click="openModal = null" class="absolute top-4 right-4 hover:opacity-85">
-                <i class="fas fa-times text-xl"></i>
+    <!-- MODAL 5 -->
+    <div class="fixed inset-0 z-50 overflow-y-auto bg-black bg-opacity-80 backdrop-filter backdrop-blur-md p-4 flex justify-center items-start sm:items-center"
+         x-show="openModal === 5" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         @click.self="openModal = null"
+         style="display: none;">
+         
+        <div class="glass-panel-dark w-full max-w-3xl rounded-3xl p-6 md:p-10 my-8 relative transform transition-all shadow-2xl"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-95">
+             
+            <button @click="openModal = null" class="absolute top-5 right-5 hover:opacity-75 focus:outline-none z-10 transition-opacity">
+                <i class="fas fa-times text-2xl"></i>
             </button>
             <span class="text-xs font-semibold uppercase tracking-wider block mb-2 opacity-80">Sáng Tạo Trực Quan</span>
             <h3 class="text-2xl font-bold mb-4">Bài 5: Ứng dụng AI tạo sinh trong sáng tạo nội dung "Học Tiếng Trung 4.0"</h3>
@@ -1056,10 +1150,10 @@
             <div class="space-y-4 font-light text-sm md:text-base leading-relaxed opacity-95">
                 <h4 class="font-semibold">💬 Các Prompt thực tế đã sử dụng:</h4>
                 <div class="space-y-3 bg-black bg-opacity-30 p-4 rounded-xl font-mono text-xs">
-                    <p><strong>[Nội dung] Prompt 1:</strong> "Tôi muốn thiết kế một Infographic về chủ đề 'Học Tiếng Trung 4.0 cùng AI' tập trung vào 3 ứng dụng: Doubao, Hanzi và Gemini. Hãy đóng vai là một chuyên gia sư phạm và chuyên gia sáng tạo nội dung, đề xuất cho tôi cấu trúc gồm 4 phần chính, ngắn gọn, thu hút hành vi người đọc."</p>
-                    <p><strong>[Nội dung] Prompt 2:</strong> "Bây giờ, hãy viết nội dung chi tiết cho từng app. Yêu cầu: Mỗi app chỉ dùng tối đa 40 từ, nêu bật tính năng độc bản của chúng..."</p>
-                    <p><strong>[Canva AI] Prompt 3 (Doubao Icon):</strong> "A 3D glassmorphism icon of a cute Chinese panda robot wearing futuristic headphones, holographic screen showing Chinese characters, vibrant orange and blue neon lighting, white background, high detail."</p>
-                    <p><strong>[Canva AI] Prompt 4 (Hanzi Icon):</strong> "A 3D rendering of a traditional Chinese calligraphy brush rewriting a glowing holographic Hanzi character (Chữ Hán) in the air, modern minimalist style, dark blue and gold accents, isolated on white background."</p>
+                    <p class="text-gray-300"><strong>[Nội dung] Prompt 1:</strong> "Tôi muốn thiết kế một Infographic về chủ đề 'Học Tiếng Trung 4.0 cùng AI' tập trung vào 3 ứng dụng: Doubao, Hanzi và Gemini. Hãy đóng vai là một chuyên gia sư phạm và chuyên gia sáng tạo nội dung, đề xuất cho tôi cấu trúc gồm 4 phần chính, ngắn gọn, thu hút hành vi người đọc."</p>
+                    <p class="text-gray-300"><strong>[Nội dung] Prompt 2:</strong> "Bây giờ, hãy viết nội dung chi tiết cho từng app. Yêu cầu: Mỗi app chỉ dùng tối đa 40 từ, nêu bật tính năng độc bản của chúng..."</p>
+                    <p class="text-gray-300"><strong>[Canva AI] Prompt 3 (Doubao Icon):</strong> "A 3D glassmorphism icon of a cute Chinese panda robot wearing futuristic headphones, holographic screen showing Chinese characters, vibrant orange and blue neon lighting, white background, high detail."</p>
+                    <p class="text-gray-300"><strong>[Canva AI] Prompt 4 (Hanzi Icon):</strong> "A 3D rendering of a traditional Chinese calligraphy brush rewriting a glowing holographic Hanzi character (Chữ Hán) in the air, modern minimalist style, dark blue and gold accents, isolated on white background."</p>
                 </div>
 
                 <h4 class="font-semibold mt-4">📊 Bảng tích hợp Human-AI (Human Touch):</h4>
@@ -1075,38 +1169,53 @@
                         <tbody>
                             <tr class="border-b">
                                 <td class="p-3 font-semibold">Nội dung & Ngôn ngữ</td>
-                                <td class="p-3 opacity-90">Gemini viết học thuật, mẫu prompt chung chung.</td>
-                                <td class="p-3 opacity-90">Tự viết lại các ví dụ ứng dụng tiếng Trung thực tiễn ("Đóng vai người phỏng vấn", "Phân tích bộ thủ chữ 德").</td>
+                                <td class="p-3 opacity-90 text-gray-300">Gemini viết học thuật, mẫu prompt chung chung.</td>
+                                <td class="p-3 opacity-90 text-gray-300">Tự viết lại các ví dụ ứng dụng tiếng Trung thực tiễn ("Đóng vai người phỏng vấn", "Phân tích bộ thủ chữ 德").</td>
                             </tr>
                             <tr class="border-b">
                                 <td class="p-3 font-semibold">Bố cục thị giác</td>
-                                <td class="p-3 opacity-90">Canva gợi ý các khối dọc khá đơn điệu.</td>
-                                <td class="p-3 opacity-90">Thiết kế lại theo dạng "Dòng chảy tư duy" (Mind-Flow layout) với đường nối neon mượt mà.</td>
+                                <td class="p-3 opacity-90 text-gray-300">Canva gợi ý các khối dọc khá đơn điệu.</td>
+                                <td class="p-3 opacity-90 text-gray-300">Thiết kế lại theo dạng "Dòng chảy tư duy" (Mind-Flow layout) với đường nối neon mượt mà.</td>
                             </tr>
                             <tr>
                                 <td class="p-3 font-semibold">Đồng bộ thiết kế</td>
-                                <td class="p-3 opacity-90">Ảnh AI tạo có độ tương phản lệch nhau.</td>
-                                <td class="p-3 opacity-90">Tách nền thủ công, chỉnh độ bão hòa, phủ filter màu cyan đồng bộ tuyệt đối về mỹ thuật.</td>
+                                <td class="p-3 opacity-90 text-gray-300">Ảnh AI tạo có độ tương phản lệch nhau.</td>
+                                <td class="p-3 opacity-90 text-gray-300">Tách nền thủ công, chỉnh độ bão hòa, phủ filter màu cyan đồng bộ tuyệt đối về mỹ thuật.</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <h4 class="font-semibold mt-4">🌿 Bài học kinh nghiệm sâu sắc:</h4>
-                <p>
+                <p class="text-gray-300">
                     AI là một "siêu trợ lý" đắc lực rút ngắn thời gian thiết kế từ 5 ngày xuống dưới 5 giờ đồng hồ, tuy nhiên giá trị thật sự và linh hồn của sản phẩm sáng tạo số nằm ở nhãn quan nghệ thuật tinh tế và trải nghiệm thực chiến của chính người học.
                 </p>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 6 (AI CÓ TRÁCH NHIỆM) -->
-    <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-85"
-         x-show="openModal === 6" x-transition:enter="transition duration-300" x-transition:leave="transition duration-200" style="display: none;">
-        <div class="glass-panel-dark max-w-3xl w-full max-h-[85vh] overflow-y-auto rounded-3xl p-6 md:p-8 relative"
-             @click.away="openModal = null">
-            <button @click="openModal = null" class="absolute top-4 right-4 hover:opacity-85">
-                <i class="fas fa-times text-xl"></i>
+    <!-- MODAL 6 -->
+    <div class="fixed inset-0 z-50 overflow-y-auto bg-black bg-opacity-80 backdrop-filter backdrop-blur-md p-4 flex justify-center items-start sm:items-center"
+         x-show="openModal === 6" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         @click.self="openModal = null"
+         style="display: none;">
+         
+        <div class="glass-panel-dark w-full max-w-3xl rounded-3xl p-6 md:p-10 my-8 relative transform transition-all shadow-2xl"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-95">
+             
+            <button @click="openModal = null" class="absolute top-5 right-5 hover:opacity-75 focus:outline-none z-10 transition-opacity">
+                <i class="fas fa-times text-2xl"></i>
             </button>
             <span class="text-xs font-semibold uppercase tracking-wider block mb-2 opacity-80">Đạo Đức Học Thuật</span>
             <h3 class="text-2xl font-bold mb-4">Bài 6: Ngọn hải đăng đạo đức giữa kỷ nguyên AI</h3>
@@ -1118,23 +1227,23 @@
                 </p>
             </div>
 
-            <div class="space-y-4 font-light text-sm md:text-base leading-relaxed opacity-95">
-                <h4 class="font-semibold">⚖️ So sánh chính sách sử dụng AI học thuật:</h4>
+            <div class="space-y-4 font-light text-sm md:text-base leading-relaxed opacity-95 text-gray-300">
+                <h4 class="font-semibold text-white">⚖️ So sánh chính sách sử dụng AI học thuật:</h4>
                 <ul class="list-disc list-inside space-y-2 pl-2">
                     <li>
-                        <strong>Đại học Việt Nam (VNU/HUST):</strong> Áp dụng định hướng khuyến khích đi kèm kiểm soát (Flexible Guidance), sử dụng Turnitin tích hợp AI Detector để rà soát ranh giới.
+                        <strong class="text-white">Đại học Việt Nam (VNU/HUST):</strong> Áp dụng định hướng khuyến khích đi kèm kiểm soát (Flexible Guidance), sử dụng Turnitin tích hợp AI Detector để rà soát ranh giới.
                     </li>
                     <li>
-                        <strong>Đại học Quốc tế (Harvard/Oxford):</strong> Phân loại cụ thể theo từng bộ môn (Course-specific AI policy), quét AI kết hợp phỏng vấn trực tiếp, có quy định chuẩn hóa riêng về trích dẫn AI (APA 7th, MLA 9th) dành cho AI.
+                        <strong class="text-white">Đại học Quốc tế (Harvard/Oxford):</strong> Phân loại cụ thể theo từng bộ môn (Course-specific AI policy), quét AI kết hợp phỏng vấn trực tiếp, có quy định chuẩn hóa riêng về trích dẫn AI (APA 7th, MLA 9th) dành cho AI.
                     </li>
                 </ul>
 
-                <h4 class="font-semibold mt-4">✍️ Thử nghiệm lập dàn ý tiểu luận Kinh tế số & Gen Z:</h4>
+                <h4 class="font-semibold mt-4 text-white">✍️ Thử nghiệm lập dàn ý tiểu luận Kinh tế số & Gen Z:</h4>
                 <p class="text-xs italic bg-white bg-opacity-5 p-3 rounded">
                     <strong>Prompt lập dàn ý:</strong> "Tôi đang viết một bài luận học thuật về 'Tác động của kinh tế số đến hành vi tiêu dùng của Gen Z tại Việt Nam'. Hãy đóng vai một chuyên gia kinh tế và gợi ý cho tôi một khung đề cương chi tiết gồm 3 chương, có luận điểm rõ ràng."
                 </p>
                 
-                <p class="font-semibold mt-2">Quy trình 3 bước xử lý thông tin học thuật nghiêm ngặt:</p>
+                <p class="font-semibold mt-2 text-white">Quy trình 3 bước xử lý thông tin học thuật nghiêm ngặt:</p>
                 <ol class="list-decimal list-inside space-y-2 pl-2 text-xs md:text-sm">
                     <li>
                         <strong>Bước 1: Rà soát thực tế (Fact-checking):</strong> AI có xu hướng tự "bịa" ra liên kết giả. Mình đã đối chiếu từng số liệu phần trăm tăng trưởng trực tiếp trên website của Cục Thương mại điện tử và Kinh tế số.
@@ -1147,8 +1256,8 @@
                     </li>
                 </ol>
 
-                <h4 class="font-semibold mt-4">🛡️ Bộ 6 Nguyên tắc sử dụng AI trách nhiệm của bản thân:</h4>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <h4 class="font-semibold mt-4 text-white">🛡️ Bộ 6 Nguyên tắc sử dụng AI trách nhiệm của bản thân:</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-gray-300">
                     <div class="glass-panel p-3 rounded"><strong>1. "Chủ thể duy nhất":</strong> Mình luôn là tác giả duy nhất chịu trách nhiệm tối cao cho mọi nội dung bài tập.</div>
                     <div class="glass-panel p-3 rounded"><strong>2. "Minh bạch tuyệt đối":</strong> Mọi ý tưởng hay cấu trúc có AI can thiệp đều được khai báo rõ ràng theo quy chuẩn APA 7th.</div>
                     <div class="glass-panel p-3 rounded"><strong>3. "Hoài nghi khoa học":</strong> Không bao giờ tin tưởng hoàn toàn số liệu AI đưa ra, luôn đối chiếu với sách và báo cáo của cơ quan chính phủ.</div>
